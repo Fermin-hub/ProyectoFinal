@@ -38,6 +38,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         agregarItemsComboBoxActor();
         agregarItemsComboBoxPelicula();
         agregarItemsComboBoxModificar();
+        btnGuardarCambios.setVisible(false);
     }
 
     public void agregarItemsComboBoxActor() {
@@ -138,6 +139,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnBuscarModificar = new javax.swing.JButton();
         btnEliminar2 = new javax.swing.JButton();
+        btnGuardarCambios = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableAsociarActores = new javax.swing.JTable();
@@ -214,7 +216,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(0, 42, Short.MAX_VALUE))))
+                                .addGap(0, 95, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -322,7 +324,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -454,7 +456,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -653,6 +655,13 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGuardarCambios.setText("Guardar cambios");
+        btnGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCambiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -673,14 +682,18 @@ public class FramePrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(btnEliminar2)))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addComponent(btnEliminar2))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(35, 35, 35)
+                                .addComponent(btnGuardarCambios)))
                         .addGap(47, 47, 47)
                         .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane8))
@@ -696,10 +709,15 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar2)))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnModificar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEliminar2))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addComponent(btnGuardarCambios)))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -767,7 +785,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)))
@@ -942,7 +960,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addComponent(btnEliminar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -986,7 +1004,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 976, Short.MAX_VALUE)
+            .addGap(0, 1029, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1035,9 +1053,67 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActorActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+        int fila = jTableModificar.getSelectedRow();
+        
+        limpiarModificar();
+        
+        if ((jComboBoxModificar.getSelectedIndex()==0) && (fila >= 0)) {
+            desactivarPeliculaModificar();
+            txtModificarActorNombre.setText(jTableModificar.getValueAt(fila, 1).toString());
+            txtModificarActorApellido.setText(jTableModificar.getValueAt(fila, 2).toString());
+            txtModificarActorEdad.setText(jTableModificar.getValueAt(fila, 3).toString());
+            txtModificarActorNacionalidad.setText(jTableModificar.getValueAt(fila, 4).toString());
+            btnGuardarCambios.setVisible(true);
+        }else if ((jComboBoxModificar.getSelectedIndex()==0) && (fila < 0)) {
+            jTextAreaRegistroModificar.setText("Por favor, seleccione primero un Actor");
+        }else if ((jComboBoxModificar.getSelectedIndex()==1) && (fila >= 0)) {
+            desactivarActorModificar();
+            txtModificarPeliculaTitulo.setText(jTableModificar.getValueAt(fila, 1).toString());
+            txtModificarPeliculaAnio.setText(jTableModificar.getValueAt(fila, 2).toString());
+            txtModificarPeliculaDuracion.setText(jTableModificar.getValueAt(fila, 3).toString());
+            jTextAreaModificarResumen.setText(jTableModificar.getValueAt(fila, 4).toString());
+            btnGuardarCambios.setVisible(true);
+        }else if ((jComboBoxModificar.getSelectedIndex()==1) && (fila < 0)) {
+            jTextAreaRegistroModificar.setText("Por favor, seleccione primero una película");
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    public void desactivarActorModificar() {
+        txtModificarActorNombre.setEditable(false);
+        txtModificarActorApellido.setEditable(false);
+        txtModificarActorEdad.setEditable(false);
+        txtModificarActorNacionalidad.setEditable(false);
+        
+        txtModificarPeliculaTitulo.setEditable(true);
+        txtModificarPeliculaAnio.setEditable(true);
+        txtModificarPeliculaDuracion.setEditable(true);
+        jTextAreaModificarResumen.setEditable(true);
+    }
+    
+    public void desactivarPeliculaModificar() {
+        txtModificarActorNombre.setEditable(true);
+        txtModificarActorApellido.setEditable(true);
+        txtModificarActorEdad.setEditable(true);
+        txtModificarActorNacionalidad.setEditable(true);
+        
+        txtModificarPeliculaTitulo.setEditable(false);
+        txtModificarPeliculaAnio.setEditable(false);
+        txtModificarPeliculaDuracion.setEditable(false);
+        jTextAreaModificarResumen.setEditable(false);
+    }
+    
+    public void limpiarModificar() {
+        txtModificarActorNombre.setText("");
+        txtModificarActorApellido.setText("");
+        txtModificarActorEdad.setText("");
+        txtModificarActorNacionalidad.setText("");
+
+        txtModificarPeliculaTitulo.setText("");
+        txtModificarPeliculaAnio.setText("");
+        txtModificarPeliculaDuracion.setText("");
+        jTextAreaModificarResumen.setText("");
+    }
+    
     private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAsociarActionPerformed
@@ -1181,6 +1257,9 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
+        
+        limpiarModificar();
+                
         if (jComboBoxModificar.getSelectedIndex()==0) {
             DefaultTableModel modeloActor = new DefaultTableModel();
             modeloActor.addColumn("Id");
@@ -1269,19 +1348,52 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminar2ActionPerformed
 
-        public void mostrarTablaActor2 (String valor) {
-            DefaultTableModel modeloActor = new DefaultTableModel();
-            modeloActor.addColumn("Id");
-            modeloActor.addColumn("Nombre");
-            modeloActor.addColumn("Apellido");
-            modeloActor.addColumn("A.Nacimiento");
-            modeloActor.addColumn("Nacionalidad");
+    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+
+        int fila = jTableModificar.getSelectedRow();
+        
+        if ((jComboBoxModificar.getSelectedIndex()==0)) {
+            if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {   
+                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+            }else{
+                try {
+                PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                pps.executeUpdate();
+                jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
+                btnGuardarCambios.setVisible(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }else if ((jComboBoxModificar.getSelectedIndex()==1)) { 
+            if (txtModificarPeliculaTitulo.getText().equals("") | txtModificarPeliculaAnio.getText().equals("") | txtModificarPeliculaDuracion.getText().equals("")) {
+                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+            }else {               
+                try {
+                    PreparedStatement pps = cn.prepareStatement("UPDATE Peliculas SET Titulo='"+txtModificarPeliculaTitulo.getText()+"',Anio='"+txtModificarPeliculaAnio.getText()+"',Duracion='"+txtModificarPeliculaDuracion.getText()+"',Resumen='"+jTextAreaModificarResumen.getText()+"' WHERE idPeliculas='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                    pps.executeUpdate();
+                    jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
+                    btnGuardarCambios.setVisible(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    public void mostrarTablaActor2 (String valor) {
+        DefaultTableModel modeloActor = new DefaultTableModel();
+        modeloActor.addColumn("Id");
+        modeloActor.addColumn("Nombre");
+        modeloActor.addColumn("Apellido");
+        modeloActor.addColumn("A.Nacimiento");
+        modeloActor.addColumn("Nacionalidad");
             
-            jTableBuscar.setModel(modeloActor);
+        jTableBuscar.setModel(modeloActor);
             
-            String sql = "SELECT * FROM Actores WHERE "+atributo+"='"+valor+"'";
+        String sql = "SELECT * FROM Actores WHERE "+atributo+"='"+valor+"'";
             
-            String datos [] = new String [5];
+        String datos [] = new String [5];
             
         try {   
             Statement st = cn.createStatement();
@@ -1331,19 +1443,20 @@ public class FramePrincipal extends javax.swing.JFrame {
         }  
     }
     
-        public void mostrarTablaPelicula2(String valor) {
-            DefaultTableModel modeloPelicula = new DefaultTableModel();
-            modeloPelicula.addColumn("Id");
-            modeloPelicula.addColumn("Titulo");
-            modeloPelicula.addColumn("Año");
-            modeloPelicula.addColumn("Duración");
-            modeloPelicula.addColumn("Resúmen");
+    public void mostrarTablaPelicula2(String valor) {
+        DefaultTableModel modeloPelicula = new DefaultTableModel();
+    
+        modeloPelicula.addColumn("Id");
+        modeloPelicula.addColumn("Titulo");
+        modeloPelicula.addColumn("Año");
+        modeloPelicula.addColumn("Duración");
+        modeloPelicula.addColumn("Resúmen");
             
-            jTableBuscar.setModel(modeloPelicula);
+        jTableBuscar.setModel(modeloPelicula);
             
-            String sql = "SELECT * FROM Peliculas WHERE "+atributo+"='"+valor+"'";
+        String sql = "SELECT * FROM Peliculas WHERE "+atributo+"='"+valor+"'";
             
-            String datos [] = new String [5];
+        String datos [] = new String [5];
             
         try {   
             Statement st = cn.createStatement();
@@ -1436,6 +1549,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnGuardarActor;
+    private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnGuardarPelicula;
     private javax.swing.JButton btnModificar;
     private javax.swing.ButtonGroup buttonGroup1;

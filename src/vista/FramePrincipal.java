@@ -27,7 +27,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         return "Cargando programa...\n";  
     }
     
-    
     public FramePrincipal() {
         initComponents();
         jTextArea1.setText(setTextArea()+"\n"+con.getString());
@@ -38,6 +37,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         crearButtonGroupBuscar();
         agregarItemsComboBoxActor();
         agregarItemsComboBoxPelicula();
+        agregarItemsComboBoxModificar();
     }
 
     public void agregarItemsComboBoxActor() {
@@ -57,8 +57,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         
     }
     
-    
-    
+    public void agregarItemsComboBoxModificar() {
+        jComboBoxModificar.addItem("Actores");
+        jComboBoxModificar.addItem("Películas");
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -109,7 +111,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextAreaRegistroPelicula = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxModificar = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -134,6 +136,8 @@ public class FramePrincipal extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         jTextAreaRegistroModificar = new javax.swing.JTextArea();
         btnModificar = new javax.swing.JButton();
+        btnBuscarModificar = new javax.swing.JButton();
+        btnEliminar2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableAsociarActores = new javax.swing.JTable();
@@ -574,7 +578,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
@@ -616,13 +620,10 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jTableModificar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane8.setViewportView(jTableModificar);
@@ -638,6 +639,20 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarModificar.setText("Buscar");
+        btnBuscarModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar2.setText("Eliminar");
+        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -647,11 +662,14 @@ public class FramePrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(btnBuscarModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -659,8 +677,11 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(btnEliminar2)))
+                        .addGap(47, 47, 47)
                         .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane8))
                 .addContainerGap())
@@ -675,15 +696,19 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(btnModificar)))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar2)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
+                        .addComponent(jComboBoxModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(btnBuscarModificar)
+                        .addGap(60, 60, 60)
                         .addComponent(jScrollPane9)))
                 .addContainerGap())
         );
@@ -1100,8 +1125,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtBuscarActor.setEditable(true);
     }
     
-    
-    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         if (jRadioButtonActor.isSelected()) {
@@ -1109,9 +1132,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         }else if (jRadioButtonPelicula.isSelected()){
             mostrarTablaPelicula();
         }
-
-        
-       
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jRadioButtonPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeliculaActionPerformed
@@ -1135,9 +1155,119 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        int fila = 
+        int fila = jTableBuscar.getSelectedRow();
         
+        if (jRadioButtonActor.isSelected() && (fila >=0)) {
+            String valor = jTableBuscar.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = cn.prepareStatement("DELETE FROM Actores WHERE idActores='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                mostrarTablaActor();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (jRadioButtonPelicula.isSelected() && (fila >=0)) {
+            String valor = jTableBuscar.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = cn.prepareStatement("DELETE FROM Peliculas WHERE idPeliculas='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                mostrarTablaPelicula();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
+        if (jComboBoxModificar.getSelectedIndex()==0) {
+            DefaultTableModel modeloActor = new DefaultTableModel();
+            modeloActor.addColumn("Id");
+            modeloActor.addColumn("Nombre");
+            modeloActor.addColumn("Apellido");
+            modeloActor.addColumn("A.Nacimiento");
+            modeloActor.addColumn("Nacionalidad");
+            
+            jTableModificar.setModel(modeloActor);
+            
+            String sql = "SELECT * FROM Actores";
+            
+            String datos [] = new String [5];
+            
+        try {   
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloActor.addRow(datos);
+            } 
+            jTableModificar.setModel(modeloActor);
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else if (jComboBoxModificar.getSelectedIndex()==1){
+            DefaultTableModel modeloPelicula = new DefaultTableModel();
+            modeloPelicula.addColumn("Id");
+            modeloPelicula.addColumn("Titulo");
+            modeloPelicula.addColumn("Año");
+            modeloPelicula.addColumn("Duración");
+            modeloPelicula.addColumn("Resúmen");
+            
+            jTableModificar.setModel(modeloPelicula);
+            
+            String sql = "SELECT * FROM Peliculas";
+            
+            String datos [] = new String [5];
+            
+        try {   
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloPelicula.addRow(datos);
+            } 
+            jTableModificar.setModel(modeloPelicula);
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }     
+ 
+    }//GEN-LAST:event_btnBuscarModificarActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        int fila = jTableModificar.getSelectedRow();
+        
+        if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=0)) {
+            String valor = jTableModificar.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = cn.prepareStatement("DELETE FROM Actores WHERE idActores='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                mostrarTablaActor();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=1)) {
+            String valor = jTableModificar.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = cn.prepareStatement("DELETE FROM Peliculas WHERE idPeliculas='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                mostrarTablaPelicula();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
 
         public void mostrarTablaActor2 (String valor) {
             DefaultTableModel modeloActor = new DefaultTableModel();
@@ -1301,14 +1431,16 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAsociar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarActor2;
+    private javax.swing.JButton btnBuscarModificar;
     private javax.swing.JButton btnBuscarPelicula2;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnGuardarActor;
     private javax.swing.JButton btnGuardarPelicula;
     private javax.swing.JButton btnModificar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxActor;
+    private javax.swing.JComboBox<String> jComboBoxModificar;
     private javax.swing.JComboBox<String> jComboBoxPelicula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

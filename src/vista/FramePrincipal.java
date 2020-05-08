@@ -149,6 +149,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         btnAsociar = new javax.swing.JButton();
+        btnBuscarAsociar = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jRadioButtonActor = new javax.swing.JRadioButton();
@@ -737,26 +738,20 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jTableAsociarActores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane6.setViewportView(jTableAsociarActores);
 
         jTableAsociarPelicula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane10.setViewportView(jTableAsociarPelicula);
@@ -774,29 +769,42 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarAsociar.setText("Buscar");
+        btnBuscarAsociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAsociarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23)))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel22))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(jLabel23)
+                        .addGap(401, 401, 401))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane10)
+                        .addContainerGap())))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel24)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel24))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(btnBuscarAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -804,17 +812,18 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel24)
-                .addGap(47, 47, 47)
-                .addComponent(btnAsociar, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
+                .addComponent(btnBuscarAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAsociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Asociar", jPanel6);
@@ -1115,7 +1124,21 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
     
     private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
-        // TODO add your handling code here:
+
+        int fila = jTableAsociarActores.getSelectedRow();
+        int fila2 = jTableAsociarPelicula.getSelectedRow();
+        try {
+            PreparedStatement pps = cn.prepareStatement("INSERT INTO Actores_has_Peliculas (Actores_idActores,Peliculas_idPeliculas) VALUES (?,?)");
+            String valor = jTableAsociarActores.getValueAt(fila, 0).toString();
+            String valor2 = jTableAsociarPelicula.getValueAt(fila, 0).toString();
+            pps.setString(0, valor);
+            pps.setString(1, valor2);
+            pps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Correcto");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAsociarActionPerformed
 
     private void jRadioButtonActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonActorActionPerformed
@@ -1256,69 +1279,67 @@ public class FramePrincipal extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    
     private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
         
-        limpiarModificar();
+    limpiarModificar();
+    String datos [] = new String [5];
                 
-        if (jComboBoxModificar.getSelectedIndex()==0) {
-            DefaultTableModel modeloActor = new DefaultTableModel();
-            modeloActor.addColumn("Id");
-            modeloActor.addColumn("Nombre");
-            modeloActor.addColumn("Apellido");
-            modeloActor.addColumn("A.Nacimiento");
-            modeloActor.addColumn("Nacionalidad");
+    if (jComboBoxModificar.getSelectedIndex()==0) {
+        DefaultTableModel modeloActor = new DefaultTableModel();
+        modeloActor.addColumn("Id");
+        modeloActor.addColumn("Nombre");
+        modeloActor.addColumn("Apellido");
+        modeloActor.addColumn("A.Nacimiento");
+        modeloActor.addColumn("Nacionalidad");
+        jTableModificar.setModel(modeloActor);
             
-            jTableModificar.setModel(modeloActor);
+        try {  
+            CallableStatement cst = cn.prepareCall("{call buscarActores}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
             
-            String sql = "SELECT * FROM Actores";
-            
-            String datos [] = new String [5];
-            
-        try {   
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos [0] = rs.getString(1);
-                datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                modeloActor.addRow(datos);
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    modeloActor.addRow(datos);
             } 
-            jTableModificar.setModel(modeloActor);
+            
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }else if (jComboBoxModificar.getSelectedIndex()==1){
-            DefaultTableModel modeloPelicula = new DefaultTableModel();
-            modeloPelicula.addColumn("Id");
-            modeloPelicula.addColumn("Titulo");
-            modeloPelicula.addColumn("Año");
-            modeloPelicula.addColumn("Duración");
-            modeloPelicula.addColumn("Resúmen");
-            
-            jTableModificar.setModel(modeloPelicula);
-            
-            String sql = "SELECT * FROM Peliculas";
-            
-            String datos [] = new String [5];
-            
+    }else if (jComboBoxModificar.getSelectedIndex()==1){
+        DefaultTableModel modeloPelicula = new DefaultTableModel();
+        modeloPelicula.addColumn("Id");
+        modeloPelicula.addColumn("Titulo");
+        modeloPelicula.addColumn("Año");
+        modeloPelicula.addColumn("Duración");
+        modeloPelicula.addColumn("Resúmen");   
+        jTableModificar.setModel(modeloPelicula);
+              
         try {   
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos [0] = rs.getString(1);
-                datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                modeloPelicula.addRow(datos);
+            CallableStatement cst = cn.prepareCall("{call buscarPeliculas}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    modeloPelicula.addRow(datos);
             } 
+            
             jTableModificar.setModel(modeloPelicula);
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }     
+    }     
  
     }//GEN-LAST:event_btnBuscarModificarActionPerformed
 
@@ -1380,6 +1401,55 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    private void btnBuscarAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAsociarActionPerformed
+        DefaultTableModel modeloActor = new DefaultTableModel();
+            modeloActor.addColumn("Id");
+            modeloActor.addColumn("Nombre");
+            modeloActor.addColumn("Apellido");
+            modeloActor.addColumn("A.Nacimiento");
+            modeloActor.addColumn("Nacionalidad");
+            jTableAsociarActores.setModel(modeloActor);
+            
+            String datos [] = new String [5];
+            CallableStatement cst;
+            ResultSet rs;
+            
+            DefaultTableModel modeloPelicula = new DefaultTableModel();
+            modeloPelicula.addColumn("Id");
+            modeloPelicula.addColumn("Titulo");
+            modeloPelicula.addColumn("Año");
+            modeloPelicula.addColumn("Duración");
+            modeloPelicula.addColumn("Resúmen");
+            jTableAsociarPelicula.setModel(modeloPelicula);
+                        
+        try { 
+            cst = cn.prepareCall("{call buscarActores}");
+            cst.execute();
+            rs = cst.executeQuery();
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloActor.addRow(datos);
+            } 
+            cst = cn.prepareCall("{call buscarPeliculas}");
+            cst.execute();
+            rs = cst.executeQuery();
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloPelicula.addRow(datos);
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+    }//GEN-LAST:event_btnBuscarAsociarActionPerformed
 
     public void mostrarTablaActor2 (String valor) {
         DefaultTableModel modeloActor = new DefaultTableModel();
@@ -1544,6 +1614,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAsociar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarActor2;
+    private javax.swing.JButton btnBuscarAsociar;
     private javax.swing.JButton btnBuscarModificar;
     private javax.swing.JButton btnBuscarPelicula2;
     private javax.swing.JButton btnEliminar;

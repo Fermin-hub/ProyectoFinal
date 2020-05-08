@@ -6,7 +6,9 @@
 package utilidades;
 
 import java.util.ArrayList;
-import modelo.Pelicula;
+
+import modelo.Actor;
+
 
 /**
  *
@@ -14,7 +16,7 @@ import modelo.Pelicula;
  */
 public class Utilidades {
     
-    static ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+    static ArrayList<Actor> lista = new ArrayList<Actor>();
     
     
     

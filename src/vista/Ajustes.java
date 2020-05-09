@@ -33,7 +33,7 @@ public class Ajustes extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         metaDatos();
         setBackground(Color.black);
-
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

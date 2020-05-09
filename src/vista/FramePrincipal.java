@@ -7,6 +7,10 @@ package vista;
 
 import java.sql.*;
 import controlador.ConexionBD;
+import java.awt.Color;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -22,6 +26,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     ConexionBD con = new ConexionBD();
     Connection cn = con.getConexion();
     private String texto, atributo = "Id";
+    String datos [] = new String [5];
 
     private String setTextArea() {
         return "Cargando programa...\n";  
@@ -39,6 +44,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         agregarItemsComboBoxPelicula();
         agregarItemsComboBoxModificar();
         btnGuardarCambios.setVisible(false);
+        bloquearRegistro();
+        llenarComboboxAjustes();
+        llenarComboboxColores();
     }
 
     public void agregarItemsComboBoxActor() {
@@ -166,7 +174,16 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxPelicula = new javax.swing.JComboBox<>();
         btnBuscarPelicula2 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        btnLLamar = new javax.swing.JButton();
+        jComboBoxPaneles = new javax.swing.JComboBox<>();
+        jComboBoxColores = new javax.swing.JComboBox<>();
+        btnGuardarAjustes = new javax.swing.JButton();
+        btnReestrablecer = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,8 +204,9 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/5b0fe132ac361-1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/BannerAPP.png"))); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("Programa de gestión cinematográfica");
 
         jLabel3.setText("Por Fermín Jiménez Pérez");
@@ -206,39 +224,41 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 95, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel4)
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(19, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(216, 216, 216)
+                        .addGap(79, 79, 79)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
-                .addContainerGap())
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Principal", jPanel2);
@@ -304,6 +324,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         );
 
         btnActivarActor.setText("Nuevo registro");
+        btnActivarActor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarActorActionPerformed(evt);
+            }
+        });
 
         btnGuardarActor.setText("Guardar");
         btnGuardarActor.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +350,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -376,7 +401,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jLabel9.setText("Título:");
 
-        jLabel10.setText("Año::");
+        jLabel10.setText("Año:");
 
         jLabel11.setText("Duración:");
 
@@ -436,6 +461,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         );
 
         btnActivarPelicula.setText("Nuevo Registro");
+        btnActivarPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarPeliculaActionPerformed(evt);
+            }
+        });
 
         btnGuardarPelicula.setText("Guardar");
         btnGuardarPelicula.addActionListener(new java.awt.event.ActionListener() {
@@ -457,7 +487,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -790,7 +820,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel22))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addComponent(jLabel23)
                         .addGap(401, 401, 401))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -939,7 +969,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                 .addComponent(txtBuscarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarPelicula2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         btnEliminar.setText("Eliminar registro");
@@ -949,35 +979,46 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel25)
-                                    .addComponent(jRadioButtonPelicula)
-                                    .addComponent(jRadioButtonActor)))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel25)
+                                            .addComponent(jRadioButtonPelicula)
+                                            .addComponent(jRadioButtonActor)))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(43, 43, 43))
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(btnEliminar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                                .addGap(22, 22, 22)
+                                .addComponent(btnEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane11)))
-                .addContainerGap())
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -991,11 +1032,13 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonPelicula)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1009,15 +1052,100 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 0));
 
+        jLabel26.setText("Configuración de la aplicación:");
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("Permisos"));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 377, Short.MAX_VALUE)
+        );
+
+        btnLLamar.setText("Información de la base de datos");
+        btnLLamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLLamarActionPerformed(evt);
+            }
+        });
+
+        jComboBoxPaneles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPanelesActionPerformed(evt);
+            }
+        });
+
+        btnGuardarAjustes.setText("Guardar");
+        btnGuardarAjustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAjustesActionPerformed(evt);
+            }
+        });
+
+        btnReestrablecer.setText("Reestablecer");
+        btnReestrablecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReestrablecerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1029, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(lblFondo)
+                                .addGap(30, 30, 30)
+                                .addComponent(jComboBoxColores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(117, 117, 117)
+                                .addComponent(btnGuardarAjustes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                                .addComponent(btnReestrablecer))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addGap(100, 100, 100)
+                                        .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel26)))
+                .addGap(52, 52, 52))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jComboBoxPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxColores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarAjustes)
+                    .addComponent(btnReestrablecer)
+                    .addComponent(lblFondo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
 
         jTabbedPane1.addTab("Configuración", jPanel8);
@@ -1028,8 +1156,8 @@ public class FramePrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1077, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1043,7 +1171,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1053,19 +1181,226 @@ public class FramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTituloPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloPeliculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTituloPeliculaActionPerformed
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        if (jRadioButtonActor.isSelected()) {
+            exportarActor();
+        }else{
+            exportarPelicula();
+        }
+    }//GEN-LAST:event_btnExportarActionPerformed
 
-    private void txtNombreActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActorActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int fila = jTableBuscar.getSelectedRow();
+
+        if (jRadioButtonActor.isSelected() && (fila >=0)) {
+            String valor = jTableBuscar.getValueAt(fila, 0).toString();
+            eliminarRegistroActores(valor);
+        }else if (jRadioButtonPelicula.isSelected() && (fila >=0)) {
+            String valor = jTableBuscar.getValueAt(fila, 0).toString();
+            eliminarRegistroPeliculas(valor);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarPelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPelicula2ActionPerformed
+        atributo = jComboBoxPelicula.getSelectedItem().toString();
+        mostrarTablaPelicula2(txtBuscarPelicula.getText());
+        txtBuscarPelicula.setText("");
+    }//GEN-LAST:event_btnBuscarPelicula2ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if (jRadioButtonActor.isSelected()) {
+            mostrarTablaActor();
+        }else if (jRadioButtonPelicula.isSelected()){
+            mostrarTablaPelicula();
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnBuscarActor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActor2ActionPerformed
+        atributo = jComboBoxActor.getSelectedItem().toString();
+        mostrarTablaActor2(txtBuscarActor.getText());
+        txtBuscarActor.setText("");
+    }//GEN-LAST:event_btnBuscarActor2ActionPerformed
+
+    private void jRadioButtonPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeliculaActionPerformed
+        desbloquearBusquedaPelicula();
+        bloquearBusquedaActor();
+    }//GEN-LAST:event_jRadioButtonPeliculaActionPerformed
+
+    private void jRadioButtonActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonActorActionPerformed
+        desbloquearBusquedaActor();
+        bloquearBusquedaPelicula();
+    }//GEN-LAST:event_jRadioButtonActorActionPerformed
+
+    private void btnBuscarAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAsociarActionPerformed
+        DefaultTableModel modeloActor = new DefaultTableModel();
+        modeloActor.addColumn("Id");
+        modeloActor.addColumn("Nombre");
+        modeloActor.addColumn("Apellido");
+        modeloActor.addColumn("A.Nacimiento");
+        modeloActor.addColumn("Nacionalidad");
+        jTableAsociarActores.setModel(modeloActor);
+
+        String datos [] = new String [5];
+        CallableStatement cst;
+        ResultSet rs;
+
+        DefaultTableModel modeloPelicula = new DefaultTableModel();
+        modeloPelicula.addColumn("Id");
+        modeloPelicula.addColumn("Titulo");
+        modeloPelicula.addColumn("Año");
+        modeloPelicula.addColumn("Duración");
+        modeloPelicula.addColumn("Resúmen");
+        jTableAsociarPelicula.setModel(modeloPelicula);
+
+        try {
+            cst = cn.prepareCall("{call buscarActores}");
+            cst.execute();
+            rs = cst.executeQuery();
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloActor.addRow(datos);
+            }
+            cst = cn.prepareCall("{call buscarPeliculas}");
+            cst.execute();
+            rs = cst.executeQuery();
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                modeloPelicula.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarAsociarActionPerformed
+
+    private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
+        int fila1 = jTableAsociarActores.getSelectedRow();
+        int fila2 = jTableAsociarPelicula.getSelectedRow();
+
+        String valor1 = jTableAsociarActores.getValueAt(fila1, 0).toString();
+        String valor2 = jTableAsociarPelicula.getValueAt(fila2, 0).toString();
+            
+        insertarAmbos(validaInt(valor1), validaInt(valor2));
+    }//GEN-LAST:event_btnAsociarActionPerformed
+
+    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+        int fila = jTableModificar.getSelectedRow();
+
+        if ((jComboBoxModificar.getSelectedIndex()==0)) {
+            if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {
+                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+            }else{
+                try {
+                    PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                    pps.executeUpdate();
+                    jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
+                    btnGuardarCambios.setVisible(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }else if ((jComboBoxModificar.getSelectedIndex()==1)) {
+            if (txtModificarPeliculaTitulo.getText().equals("") | txtModificarPeliculaAnio.getText().equals("") | txtModificarPeliculaDuracion.getText().equals("")) {
+                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+            }else {
+                try {
+                    PreparedStatement pps = cn.prepareStatement("UPDATE Peliculas SET Titulo='"+txtModificarPeliculaTitulo.getText()+"',Anio='"+txtModificarPeliculaAnio.getText()+"',Duracion='"+txtModificarPeliculaDuracion.getText()+"',Resumen='"+jTextAreaModificarResumen.getText()+"' WHERE idPeliculas='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                    pps.executeUpdate();
+                    jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
+                    btnGuardarCambios.setVisible(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        int fila = jTableModificar.getSelectedRow();
+
+        if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=0)) {
+            String valor = jTableModificar.getValueAt(fila, 0).toString();
+            eliminarRegistroActores(valor);
+        }else if (jComboBoxModificar.getSelectedIndex()==1 && (fila >=0)) {
+            String valor = jTableModificar.getValueAt(fila, 0).toString();
+            eliminarRegistroPeliculas(valor);
+        }
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
+    private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
+
+        limpiarModificar();
+
+        if (jComboBoxModificar.getSelectedIndex()==0) {
+            DefaultTableModel modeloActor = new DefaultTableModel();
+            modeloActor.addColumn("Id");
+            modeloActor.addColumn("Nombre");
+            modeloActor.addColumn("Apellido");
+            modeloActor.addColumn("A.Nacimiento");
+            modeloActor.addColumn("Nacionalidad");
+            jTableModificar.setModel(modeloActor);
+
+            try {
+                CallableStatement cst = cn.prepareCall("{call buscarActores}");
+                cst.execute();
+                ResultSet rs = cst.executeQuery();
+
+                while (rs.next()) {
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    modeloActor.addRow(datos);
+                }
+
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (jComboBoxModificar.getSelectedIndex()==1){
+            DefaultTableModel modeloPelicula = new DefaultTableModel();
+            modeloPelicula.addColumn("Id");
+            modeloPelicula.addColumn("Titulo");
+            modeloPelicula.addColumn("Año");
+            modeloPelicula.addColumn("Duración");
+            modeloPelicula.addColumn("Resúmen");
+            jTableModificar.setModel(modeloPelicula);
+
+            try {
+                CallableStatement cst = cn.prepareCall("{call buscarPeliculas}");
+                cst.execute();
+                ResultSet rs = cst.executeQuery();
+                while (rs.next()) {
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    modeloPelicula.addRow(datos);
+                }
+
+                jTableModificar.setModel(modeloPelicula);
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_btnBuscarModificarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int fila = jTableModificar.getSelectedRow();
-        
+
         limpiarModificar();
-        
+
         if ((jComboBoxModificar.getSelectedIndex()==0) && (fila >= 0)) {
             desactivarPeliculaModificar();
             txtModificarActorNombre.setText(jTableModificar.getValueAt(fila, 1).toString());
@@ -1087,6 +1422,243 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
+        int anio = validaInt(txtAnioPelicula.getText());
+        int duracion = validaInt(txtDuracionPelicula.getText());
+        if (txtTituloPelicula.getText().equals("") | txtAnioPelicula.getText().equals("") | txtDuracionPelicula.getText().equals("")){
+            jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
+        }else{
+            insertarPelicula(txtTituloPelicula.getText(), anio, duracion, jTextAreaResumenPelicula.getText());
+        }
+        bloquearRegistro();
+        limpiarRegistro();
+    }//GEN-LAST:event_btnGuardarPeliculaActionPerformed
+
+    private void btnActivarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarPeliculaActionPerformed
+        desbloquearRegistroPelicula();
+    }//GEN-LAST:event_btnActivarPeliculaActionPerformed
+
+    private void txtTituloPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloPeliculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloPeliculaActionPerformed
+
+    private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
+        int numero = validaInt(txtNacimiento.getText());
+        if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")){
+            jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
+        }else{
+            insertarActor(txtNombreActor.getText(), txtApellidoActor.getText(), numero, txtNacionalidadActor.getText());
+        }
+        bloquearRegistro();
+        limpiarRegistro();
+    }//GEN-LAST:event_btnGuardarActorActionPerformed
+
+    private void btnActivarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActorActionPerformed
+        desbloquearRegistroActor();
+    }//GEN-LAST:event_btnActivarActorActionPerformed
+
+    private void txtNombreActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActorActionPerformed
+
+    private void btnLLamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLLamarActionPerformed
+        Ajustes s = new Ajustes();
+    }//GEN-LAST:event_btnLLamarActionPerformed
+
+    private void jComboBoxPanelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPanelesActionPerformed
+        if (jComboBoxPaneles.getSelectedIndex()==0) {
+            lblFondo.setText("Color del fondo:");   
+        }
+    }//GEN-LAST:event_jComboBoxPanelesActionPerformed
+
+    private void btnGuardarAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAjustesActionPerformed
+        if (jComboBoxPaneles.getSelectedIndex()==0) {
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel2.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel2.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel2.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel2.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel2.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel2.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==1){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel3.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel3.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel3.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel3.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel3.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel3.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==2){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel4.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel4.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel4.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel4.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel4.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel4.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==3){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel5.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel5.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel5.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel5.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel5.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel5.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==4){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel6.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel6.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel6.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel6.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel6.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel6.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==5){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel7.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel7.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel7.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel7.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel7.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel7.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }
+        }else if (jComboBoxPaneles.getSelectedIndex()==6){
+            if (jComboBoxColores.getSelectedIndex()==0) {
+                jPanel8.setBackground(Color.black);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==1){
+                jPanel8.setBackground(Color.blue);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==2) {
+                jPanel8.setBackground(Color.yellow);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==3){
+                jPanel8.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==4) {
+                jPanel8.setBackground(Color.white);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }else if (jComboBoxColores.getSelectedIndex()==5) {
+                jPanel8.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Color cambiado correctamente");
+            }      
+        }
+    }//GEN-LAST:event_btnGuardarAjustesActionPerformed
+
+    private void btnReestrablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReestrablecerActionPerformed
+        if (jComboBoxPaneles.getSelectedIndex()==0) {
+            jPanel2.setBackground(new java.awt.Color(204,204,255));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==1) {
+            jPanel3.setBackground(new java.awt.Color(255,204,255));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==2) {
+            jPanel4.setBackground(new java.awt.Color(255,204,204));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==3) {
+            jPanel5.setBackground(new java.awt.Color(238,238,238));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==4) {
+            jPanel6.setBackground(new java.awt.Color(204,255,204));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==5) {
+            jPanel7.setBackground(new java.awt.Color(204,153,255));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }else if (jComboBoxPaneles.getSelectedIndex()==6) {
+            jPanel8.setBackground(new java.awt.Color(204,204,0));
+            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+        }
+    }//GEN-LAST:event_btnReestrablecerActionPerformed
+
+    public void llenarComboboxAjustes() {
+        jComboBoxPaneles.addItem("Principal");
+        jComboBoxPaneles.addItem("Registrar actor");
+        jComboBoxPaneles.addItem("Registrar película");
+        jComboBoxPaneles.addItem("Modificar");
+        jComboBoxPaneles.addItem("Asociar");
+        jComboBoxPaneles.addItem("Buscar");
+        jComboBoxPaneles.addItem("Configuración");
+    }
+    
+    public void llenarComboboxColores() {
+        jComboBoxColores.addItem("Negro");
+        jComboBoxColores.addItem("Azul");
+        jComboBoxColores.addItem("Amarillo");
+        jComboBoxColores.addItem("Rojo");
+        jComboBoxColores.addItem("Blanco");
+        jComboBoxColores.addItem("Verde");
+    }
+    
     public void desactivarActorModificar() {
         txtModificarActorNombre.setEditable(false);
         txtModificarActorApellido.setEditable(false);
@@ -1123,78 +1695,60 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextAreaModificarResumen.setText("");
     }
     
-    private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
-
-        int fila = jTableAsociarActores.getSelectedRow();
-        int fila2 = jTableAsociarPelicula.getSelectedRow();
+    public void limpiarRegistro() {
+        txtNombreActor.setText("");
+        txtApellidoActor.setText("");
+        txtNacimiento.setText("");
+        txtNacionalidadActor.setText("");
+        
+        txtTituloPelicula.setText("");
+        txtAnioPelicula.setText("");
+        txtDuracionPelicula.setText("");
+        jTextAreaResumenPelicula.setText("");
+    }
+    
+    private void bloquearRegistro() {
+        txtNombreActor.setEditable(false);
+        txtApellidoActor.setEditable(false);
+        txtNacimiento.setEditable(false);
+        txtNacionalidadActor.setEditable(false);
+        btnGuardarActor.setVisible(false);
+        
+        txtTituloPelicula.setEditable(false);
+        txtAnioPelicula.setEditable(false);
+        txtDuracionPelicula.setEditable(false);
+        jTextAreaResumenPelicula.setEditable(false);
+        btnGuardarPelicula.setVisible(false);
+    }
+    
+    private void desbloquearRegistroActor() {
+        txtNombreActor.setEditable(true);
+        txtApellidoActor.setEditable(true);
+        txtNacimiento.setEditable(true);
+        txtNacionalidadActor.setEditable(true);
+        btnGuardarActor.setVisible(true);
+    }
+    
+    private void desbloquearRegistroPelicula() {
+        txtTituloPelicula.setEditable(true);
+        txtAnioPelicula.setEditable(true);
+        txtDuracionPelicula.setEditable(true);
+        jTextAreaResumenPelicula.setEditable(true);
+        btnGuardarPelicula.setVisible(true);
+    }
+    
+    private int validaInt (String numero) {
+        int resultado = 0;
         try {
-            PreparedStatement pps = cn.prepareStatement("INSERT INTO Actores_has_Peliculas (Actores_idActores,Peliculas_idPeliculas) VALUES (?,?)");
-            String valor = jTableAsociarActores.getValueAt(fila, 0).toString();
-            String valor2 = jTableAsociarPelicula.getValueAt(fila, 0).toString();
-            pps.setString(0, valor);
-            pps.setString(1, valor2);
-            pps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Correcto");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            if (numero != null) {
+                resultado = Integer.parseInt(numero);
+            }
+        }catch (NumberFormatException E) { 
+            JOptionPane.showMessageDialog(null, "Número introducido incorrecto");
         }
-    }//GEN-LAST:event_btnAsociarActionPerformed
-
-    private void jRadioButtonActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonActorActionPerformed
-        desbloquearBusquedaActor();
-        bloquearBusquedaPelicula();
-    }//GEN-LAST:event_jRadioButtonActorActionPerformed
-
-    private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
-
-        try {
-            PreparedStatement pps = cn.prepareStatement("INSERT INTO Actores (Nombre,Apellido,ANacimiento,Nacionalidad) VALUES (?,?,?,?)");
-            if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")){
-                jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
-                jTextArea1.setText(texto+"\nError al guardar un Actor en la base de datos");
-                texto = jTextArea1.getText();
-            }else{
-                String texto2 = "";
-                pps.setString(1, txtNombreActor.getText());
-                pps.setString(2, txtApellidoActor.getText());
-                pps.setString(3, txtNacimiento.getText());
-                pps.setString(4, txtNacionalidadActor.getText());
-                pps.executeUpdate();        
-                jTextArea1.setText(texto2+"\nSe ha guardado el actor "+txtNombreActor.getText()+" correctamente");
-                jTextAreaRegistroActor.setText(texto2+"\nSe ha guardado el actor "+txtNombreActor.getText()+" correctamente");
-                texto2 = jTextAreaRegistroActor.getText();               
-                JOptionPane.showMessageDialog(null, "Datos guardados");
-            }   
-        } catch (SQLException ex) {
-            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnGuardarActorActionPerformed
-
-    private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
-        try {
-            PreparedStatement pps = cn.prepareStatement("INSERT INTO Peliculas (Titulo,Anio,Duracion,Resumen) VALUES (?,?,?,?)");
-            if (txtTituloPelicula.getText().equals("") | txtAnioPelicula.getText().equals("") | txtDuracionPelicula.getText().equals("")){
-                jTextAreaRegistroPelicula.setText("Error al guardar la Película en la base de datos, rellene los campos");
-                jTextArea1.setText(texto+"\nError al guardar una Película en la base de datos");
-                texto = jTextArea1.getText();
-            }else{
-                String texto2 = "";
-                pps.setString(1, txtTituloPelicula.getText());
-                pps.setString(2, txtAnioPelicula.getText());
-                pps.setString(3, txtDuracionPelicula.getText());
-                pps.setString(4, jTextAreaResumenPelicula.getText());
-                pps.executeUpdate();        
-                jTextArea1.setText(texto2+"\nSe ha guardado la película "+txtTituloPelicula.getText()+" correctamente");
-                jTextAreaRegistroPelicula.setText(texto2+"\nSe ha guardado la película "+txtTituloPelicula.getText()+" correctamente");
-                texto2 = jTextAreaRegistroPelicula.getText();               
-                JOptionPane.showMessageDialog(null, "Datos guardados");
-            }   
-        } catch (SQLException ex) {
-            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnGuardarPeliculaActionPerformed
-
+        return resultado;
+    }
+    
     public void crearButtonGroupBuscar() {
         buttonGroup1.add(jRadioButtonActor);
         buttonGroup1.add(jRadioButtonPelicula);
@@ -1224,233 +1778,133 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtBuscarActor.setEditable(true);
     }
     
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        if (jRadioButtonActor.isSelected()) {
-            mostrarTablaActor();
-        }else if (jRadioButtonPelicula.isSelected()){
-            mostrarTablaPelicula();
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void jRadioButtonPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeliculaActionPerformed
-       desbloquearBusquedaPelicula();
-       bloquearBusquedaActor();  
-    }//GEN-LAST:event_jRadioButtonPeliculaActionPerformed
-
-    private void btnBuscarActor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActor2ActionPerformed
-     
-        atributo = jComboBoxActor.getSelectedItem().toString();
-        mostrarTablaActor2(txtBuscarActor.getText());
-        txtBuscarActor.setText("");
-        
-    }//GEN-LAST:event_btnBuscarActor2ActionPerformed
-
-    private void btnBuscarPelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPelicula2ActionPerformed
-        atributo = jComboBoxPelicula.getSelectedItem().toString();
-        mostrarTablaPelicula2(txtBuscarPelicula.getText());
-        txtBuscarPelicula.setText("");  
-    }//GEN-LAST:event_btnBuscarPelicula2ActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        int fila = jTableBuscar.getSelectedRow();
-        
-        if (jRadioButtonActor.isSelected() && (fila >=0)) {
-            String valor = jTableBuscar.getValueAt(fila, 0).toString();
-            try {
-                PreparedStatement pps = cn.prepareStatement("DELETE FROM Actores WHERE idActores='"+valor+"'");
-                pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
-                mostrarTablaActor();
-            } catch (SQLException ex) {
-                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else if (jRadioButtonPelicula.isSelected() && (fila >=0)) {
-            String valor = jTableBuscar.getValueAt(fila, 0).toString();
-            try {
-                PreparedStatement pps = cn.prepareStatement("DELETE FROM Peliculas WHERE idPeliculas='"+valor+"'");
-                pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
-                mostrarTablaPelicula();
-            } catch (SQLException ex) {
-                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } 
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    
-    private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
-        
-    limpiarModificar();
-    String datos [] = new String [5];
-                
-    if (jComboBoxModificar.getSelectedIndex()==0) {
-        DefaultTableModel modeloActor = new DefaultTableModel();
-        modeloActor.addColumn("Id");
-        modeloActor.addColumn("Nombre");
-        modeloActor.addColumn("Apellido");
-        modeloActor.addColumn("A.Nacimiento");
-        modeloActor.addColumn("Nacionalidad");
-        jTableModificar.setModel(modeloActor);
-            
+    private void insertarAmbos(int idActor,int idPelicula) {
         try {  
-            CallableStatement cst = cn.prepareCall("{call buscarActores}");
+            CallableStatement cst = cn.prepareCall("{CALL insertarAmbos(?,?)}");
+            cst.setInt(1, idActor);
+            cst.setInt(2, idPelicula);
             cst.execute();
-            ResultSet rs = cst.executeQuery();
-            
-            while (rs.next()) {               
-                    datos [0] = rs.getString(1);
-                    datos [1] = rs.getString(2);
-                    datos [2] = rs.getString(3);
-                    datos [3] = rs.getString(4);
-                    datos [4] = rs.getString(5);
-                    modeloActor.addRow(datos);
-            } 
-            
-            rs.close();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Asociados correctamente");
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }else if (jComboBoxModificar.getSelectedIndex()==1){
-        DefaultTableModel modeloPelicula = new DefaultTableModel();
-        modeloPelicula.addColumn("Id");
-        modeloPelicula.addColumn("Titulo");
-        modeloPelicula.addColumn("Año");
-        modeloPelicula.addColumn("Duración");
-        modeloPelicula.addColumn("Resúmen");   
-        jTableModificar.setModel(modeloPelicula);
-              
-        try {   
-            CallableStatement cst = cn.prepareCall("{call buscarPeliculas}");
+    }
+    
+    private void insertarActor (String Nombre,String Apellido, int ANacimiento,String Nacionalidad) {
+        try {  
+            CallableStatement cst = cn.prepareCall("{CALL insertarActor(?,?,?,?)}");
+            cst.setString(1, Nombre);
+            cst.setString(2, Apellido);
+            cst.setInt(3, ANacimiento);
+            cst.setString(4, Nacionalidad);
             cst.execute();
-            ResultSet rs = cst.executeQuery();
-            while (rs.next()) {               
-                    datos [0] = rs.getString(1);
-                    datos [1] = rs.getString(2);
-                    datos [2] = rs.getString(3);
-                    datos [3] = rs.getString(4);
-                    datos [4] = rs.getString(5);
-                    modeloPelicula.addRow(datos);
-            } 
-            
-            jTableModificar.setModel(modeloPelicula);
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }     
- 
-    }//GEN-LAST:event_btnBuscarModificarActionPerformed
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Actor insertado correctamente");
 
-    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-        int fila = jTableModificar.getSelectedRow();
-        
-        if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=0)) {
-            String valor = jTableModificar.getValueAt(fila, 0).toString();
-            try {
-                PreparedStatement pps = cn.prepareStatement("DELETE FROM Actores WHERE idActores='"+valor+"'");
-                pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
-                mostrarTablaActor();
-            } catch (SQLException ex) {
-                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=1)) {
-            String valor = jTableModificar.getValueAt(fila, 0).toString();
-            try {
-                PreparedStatement pps = cn.prepareStatement("DELETE FROM Peliculas WHERE idPeliculas='"+valor+"'");
-                pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
-                mostrarTablaPelicula();
-            } catch (SQLException ex) {
-                Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_btnEliminar2ActionPerformed
-
-    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
-
-        int fila = jTableModificar.getSelectedRow();
-        
-        if ((jComboBoxModificar.getSelectedIndex()==0)) {
-            if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {   
-                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
-            }else{
-                try {
-                PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
-                pps.executeUpdate();
-                jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
-                btnGuardarCambios.setVisible(false);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }else if ((jComboBoxModificar.getSelectedIndex()==1)) { 
-            if (txtModificarPeliculaTitulo.getText().equals("") | txtModificarPeliculaAnio.getText().equals("") | txtModificarPeliculaDuracion.getText().equals("")) {
-                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
-            }else {               
-                try {
-                    PreparedStatement pps = cn.prepareStatement("UPDATE Peliculas SET Titulo='"+txtModificarPeliculaTitulo.getText()+"',Anio='"+txtModificarPeliculaAnio.getText()+"',Duracion='"+txtModificarPeliculaDuracion.getText()+"',Resumen='"+jTextAreaModificarResumen.getText()+"' WHERE idPeliculas='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
-                    pps.executeUpdate();
-                    jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
-                    btnGuardarCambios.setVisible(false);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
-
-    private void btnBuscarAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAsociarActionPerformed
-        DefaultTableModel modeloActor = new DefaultTableModel();
-            modeloActor.addColumn("Id");
-            modeloActor.addColumn("Nombre");
-            modeloActor.addColumn("Apellido");
-            modeloActor.addColumn("A.Nacimiento");
-            modeloActor.addColumn("Nacionalidad");
-            jTableAsociarActores.setModel(modeloActor);
-            
-            String datos [] = new String [5];
-            CallableStatement cst;
-            ResultSet rs;
-            
-            DefaultTableModel modeloPelicula = new DefaultTableModel();
-            modeloPelicula.addColumn("Id");
-            modeloPelicula.addColumn("Titulo");
-            modeloPelicula.addColumn("Año");
-            modeloPelicula.addColumn("Duración");
-            modeloPelicula.addColumn("Resúmen");
-            jTableAsociarPelicula.setModel(modeloPelicula);
-                        
-        try { 
-            cst = cn.prepareCall("{call buscarActores}");
-            cst.execute();
-            rs = cst.executeQuery();
-            while (rs.next()) {
-                datos [0] = rs.getString(1);
-                datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                modeloActor.addRow(datos);
-            } 
-            cst = cn.prepareCall("{call buscarPeliculas}");
-            cst.execute();
-            rs = cst.executeQuery();
-            while (rs.next()) {
-                datos [0] = rs.getString(1);
-                datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                modeloPelicula.addRow(datos);
-            } 
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }      
-    }//GEN-LAST:event_btnBuscarAsociarActionPerformed
+    }
+    
+    private void insertarPelicula (String Titulo,int Anio,int Duracion,String Resumen){
+        try {  
+            CallableStatement cst = cn.prepareCall("{CALL insertarPelicula(?,?,?,?)}");
+            cst.setString(1, Titulo);
+            cst.setInt(2, Anio);
+            cst.setInt(3, Duracion);
+            cst.setString(4, Resumen);
+            cst.execute();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Película insertada correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
+    public void eliminarRegistroActores(String v_nid) {      
+        try {  
+            CallableStatement cst = cn.prepareCall("{call eliminarRegistrosActores(?)}");
+            cst.setString(1, v_nid);
+            cst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Actor eliminado correctamente");
 
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
+    public void eliminarRegistroPeliculas(String v_nid) {       
+        try {  
+            CallableStatement cst = cn.prepareCall("{call eliminarRegistroPeliculas(?)}");
+            cst.setString(1, v_nid);
+            cst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Película eliminada correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+       
+    private void exportarActor() {
+        ResultSet rs = null;
+        StringBuffer strBuf = null;        
+        try {
+            Statement stm = cn.createStatement();
+            rs = stm.executeQuery("SELECT * FROM Actores");
+            strBuf = new StringBuffer();            
+            FileWriter fw = new FileWriter(new File("Actores.txt" ));
+            String data_row = "";                          
+            while(rs.next()){
+                data_row = "\n";
+                data_row += rs.getInt("idActores");
+                data_row += "," + rs.getString("Nombre").trim();
+                data_row += "," + rs.getString("Apellido").trim();
+                data_row += "," + rs.getInt("ANacimiento");
+                data_row += "," + rs.getString("Nacionalidad").trim();
+                fw.write(data_row);
+            }
+            fw.close();
+            rs.close();
+            JOptionPane.showMessageDialog(null, "Actores exportados correctamente");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void exportarPelicula() {
+        ResultSet rs = null;
+        StringBuffer strBuf = null;        
+        try {
+            Statement stm = cn.createStatement();
+            rs = stm.executeQuery("SELECT * FROM Peliculas");
+            strBuf = new StringBuffer();            
+            FileWriter fw = new FileWriter(new File("Peliculas.txt" ));
+            String data_row = "";                          
+            while(rs.next()){
+                data_row = "\n";
+                data_row += rs.getInt("idPeliculas");
+                data_row += "," + rs.getString("Titulo").trim();
+                data_row += "," + rs.getInt("Anio");
+                data_row += "," + rs.getInt("Duracion");
+                data_row += "," + rs.getString("Resumen").trim();
+                fw.write(data_row);
+            }
+            fw.close();
+            rs.close();
+            JOptionPane.showMessageDialog(null, "Películas exportadas correctamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void mostrarTablaActor2 (String valor) {
         DefaultTableModel modeloActor = new DefaultTableModel();
         modeloActor.addColumn("Id");
@@ -1619,13 +2073,19 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPelicula2;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminar2;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnGuardarActor;
+    private javax.swing.JButton btnGuardarAjustes;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnGuardarPelicula;
+    private javax.swing.JButton btnLLamar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnReestrablecer;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBoxActor;
+    private javax.swing.JComboBox<String> jComboBoxColores;
     private javax.swing.JComboBox<String> jComboBoxModificar;
+    private javax.swing.JComboBox<String> jComboBoxPaneles;
     private javax.swing.JComboBox<String> jComboBoxPelicula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1645,6 +2105,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1660,6 +2121,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1693,6 +2155,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaRegistroModificar;
     private javax.swing.JTextArea jTextAreaRegistroPelicula;
     private javax.swing.JTextArea jTextAreaResumenPelicula;
+    private javax.swing.JLabel lblFondo;
     private javax.swing.JTextField txtAnioPelicula;
     private javax.swing.JTextField txtApellidoActor;
     private javax.swing.JTextField txtBuscarActor;

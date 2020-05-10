@@ -14,11 +14,14 @@ import java.sql.*;
  */
 public class ConexionBD {
 
+    
   private final String db = "fjimenez_proyecto";
   /** usuario */
   private final String user = "fermin";
+  private final String user2 = "Usuario2";
   /** contraseña de MySql*/
   private final String password = "Password1!*";
+  private final String password2 = "Password2!*";
   /** Cadena de conexion */
   private String url = "jdbc:mysql://fjimenez.salesianas.es/"+db;
   /** variable para trabajar con la conexion a la base de datos */
@@ -36,6 +39,22 @@ public class ConexionBD {
          Class.forName("com.mysql.jdbc.Driver");
          //obtenemos la conexión
          cn = DriverManager.getConnection( this.url, this.user , this.password );  
+         exito = "Conexion a la base de datos correcta";
+           //System.out.println("Conexion correcta");
+      }catch(SQLException e){
+         System.err.println( e.getMessage() );
+      }catch(ClassNotFoundException e){
+         System.err.println( e.getMessage() );
+      }
+   }
+   
+      public ConexionBD(int numero){
+        this.url = "jdbc:mysql://fjimenez.salesianas.es/"+this.db;
+       try{
+         //obtenemos el driver de para mysql
+         Class.forName("com.mysql.jdbc.Driver");
+         //obtenemos la conexión
+         cn = DriverManager.getConnection( this.url, this.user2 , this.password2 );  
          exito = "Conexion a la base de datos correcta";
            //System.out.println("Conexion correcta");
       }catch(SQLException e){

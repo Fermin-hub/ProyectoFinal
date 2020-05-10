@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -27,7 +28,9 @@ import javax.swing.table.DefaultTableModel;
  * @author fer
  */
 public class FramePrincipal extends javax.swing.JFrame {
-
+    
+    ConexionBD con2 = new ConexionBD(1);
+    Connection cn2 = con2.getConexion();
     ConexionBD con = new ConexionBD();
     Connection cn = con.getConexion();
     private String texto, atributo = "Id";
@@ -73,6 +76,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         llenarComboboxColores();
         usuario();
         setResizable(false);
+        log = 1;
     }
         
     public void usuario() {
@@ -1442,7 +1446,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void btnBuscarPelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPelicula2ActionPerformed
         atributo = jComboBoxPelicula.getSelectedItem().toString();
-        mostrarTablaPelicula2(txtBuscarPelicula.getText());
+        mostrarTablaPelicula2("%"+txtBuscarPelicula.getText()+"%");
         txtBuscarPelicula.setText("");
     }//GEN-LAST:event_btnBuscarPelicula2ActionPerformed
 
@@ -1456,7 +1460,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void btnBuscarActor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActor2ActionPerformed
         atributo = jComboBoxActor.getSelectedItem().toString();
-        mostrarTablaActor2(txtBuscarActor.getText());
+        mostrarTablaActor2("%"+txtBuscarActor.getText()+"%");
         txtBuscarActor.setText("");
     }//GEN-LAST:event_btnBuscarActor2ActionPerformed
 
@@ -1969,11 +1973,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRelacionesActionPerformed
 
-    private void cargarImagen(String imagen) {
-        //jLabel1.setIcon(new ImageIcon("/Imagenes/"+imagen));
-        ImageIcon icon = new ImageIcon("/Imagenes/"+imagen);
-        icon = new ImageIcon(icon.getImage());
-        jLabel1.setIcon(icon); 
+    private void cargarImagen(String imagen) {       
+
+        ImageIcon imgThisImg = new ImageIcon("/Imagenes/"+imagen);
+
+        jLabel1.setIcon(imgThisImg);
     }
     
     private void copiarImagen(){
@@ -1988,10 +1992,9 @@ public class FramePrincipal extends javax.swing.JFrame {
                 Path destino = Paths.get(dest);
                 String orig = archivo.getPath();
                 Path origen = Paths.get(orig);
-                Files.copy(origen, destino, REPLACE_EXISTING);
-                cargarImagen(nombre);
+                Files.copy(origen, destino, REPLACE_EXISTING);             
                 JOptionPane.showMessageDialog(null, "Copiado");
-                
+                cargarImagen(nombre);
             }catch(IOException ex) {   
                 JOptionPane.showMessageDialog(null, "Error");
             }
@@ -2272,7 +2275,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             
         jTableBuscar.setModel(modeloActor);
             
-        String sql = "SELECT * FROM Actores WHERE "+atributo+"='"+valor+"'";
+        String sql = "SELECT * FROM Actores WHERE "+atributo+" LIKE '"+valor+"'";
             
         String datos [] = new String [5];
             
@@ -2335,8 +2338,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             
         jTableBuscar.setModel(modeloPelicula);
             
-        String sql = "SELECT * FROM Peliculas WHERE "+atributo+"='"+valor+"'";
-            
+        String sql = "SELECT * FROM Peliculas WHERE "+atributo+" LIKE '"+valor+"'";
         String datos [] = new String [5];
             
         try {   

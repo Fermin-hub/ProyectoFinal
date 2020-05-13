@@ -63,8 +63,7 @@ public class ConexionBD {
          System.err.println( e.getMessage() );
       }
    }
-   
-   
+     
    public Connection getConexion() {
     return this.cn;
    }

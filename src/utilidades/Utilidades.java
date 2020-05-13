@@ -5,7 +5,15 @@
  */
 package utilidades;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import modelo.Actor;
 
@@ -16,7 +24,23 @@ import modelo.Actor;
  */
 public class Utilidades {
     
-    static ArrayList<Actor> lista = new ArrayList<Actor>();
+    public static int validaInt (String numero) {
+        int resultado = 0;
+        try {
+            if (numero != null) {
+                resultado = Integer.parseInt(numero);
+            }
+        }catch (NumberFormatException E) { 
+            JOptionPane.showMessageDialog(null, "Número introducido incorrecto");
+        }
+        return resultado;
+    }
+    
+    public static int confirmar() {       
+        int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar registro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        return confirm;       
+    }
+   
     
     
     

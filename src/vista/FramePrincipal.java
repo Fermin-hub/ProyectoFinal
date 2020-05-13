@@ -4,24 +4,15 @@ package vista;
 import java.sql.*;
 import controlador.ConexionBD;
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utilidades.Utilidades;
 
 /**
  *
@@ -141,18 +132,12 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxPelicula.addItem("Titulo");
         jComboBoxPelicula.addItem("Anio");
         jComboBoxPelicula.addItem("Duracion");
-        jComboBoxPelicula.addItem("Resumen");
-        
+        jComboBoxPelicula.addItem("Resumen");        
     }
     
     public void agregarItemsComboBoxModificar() {
         jComboBoxModificar.addItem("Actores");
         jComboBoxModificar.addItem("Películas");
-    }
-    
-    public int confirmar() {       
-        int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar registro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        return confirm;       
     }
     
     @SuppressWarnings("unchecked")
@@ -260,6 +245,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
         btnRelaciones = new javax.swing.JButton();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jTableAsociados = new javax.swing.JTable();
+        btnBorrarRelacion = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
@@ -284,7 +272,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         btnGuardarAjustes = new javax.swing.JButton();
         btnReestrablecer = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -920,14 +907,15 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel22))
+                        .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jLabel23)
                         .addGap(401, 401, 401))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -957,9 +945,9 @@ public class FramePrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAsociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnAsociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1076,7 +1064,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                 .addComponent(txtBuscarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarPelicula2)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnEliminar.setText("Eliminar registro");
@@ -1100,16 +1088,30 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTableAsociados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane12.setViewportView(jTableAsociados);
+
+        btnBorrarRelacion.setText("Borrar");
+        btnBorrarRelacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarRelacionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1131,15 +1133,28 @@ public class FramePrincipal extends javax.swing.JFrame {
                                 .addGap(70, 70, 70)
                                 .addComponent(btnRelaciones)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane11)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBorrarRelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel25)
@@ -1154,16 +1169,17 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnEliminar)
-                            .addComponent(btnRelaciones))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnRelaciones))))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)))
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnBorrarRelacion, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(202, 202, 202))
         );
 
         jTabbedPane1.addTab("Buscar", jPanel7);
@@ -1314,13 +1330,6 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cambiar imágen principal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1345,13 +1354,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                                 .addComponent(btnReestrablecer)
                                 .addGap(84, 84, 84))))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(133, 133, 133)
-                                .addComponent(jButton1)))
+                        .addGap(123, 123, 123)
+                        .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
@@ -1372,19 +1376,16 @@ public class FramePrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(lblFondo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblFondo))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxColores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardarAjustes)
                             .addComponent(btnReestrablecer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
+                        .addGap(80, 80, 80)
+                        .addComponent(btnLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Configuración", jPanel8);
@@ -1432,12 +1433,12 @@ public class FramePrincipal extends javax.swing.JFrame {
         int fila = jTableBuscar.getSelectedRow();
 
         if (jRadioButtonActor.isSelected() && (fila >=0)) {
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
                 String valor = jTableBuscar.getValueAt(fila, 0).toString();
                 eliminarRegistroActores(valor);
             }
         }else if (jRadioButtonPelicula.isSelected() && (fila >=0)) {
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
             String valor = jTableBuscar.getValueAt(fila, 0).toString();
             eliminarRegistroPeliculas(valor);
             }
@@ -1529,8 +1530,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         String valor1 = jTableAsociarActores.getValueAt(fila1, 0).toString();
         String valor2 = jTableAsociarPelicula.getValueAt(fila2, 0).toString();
         
-        if (confirmar()==0) {   
-            insertarAmbos(validaInt(valor1), validaInt(valor2));
+        if (fila1 >=0 && fila2 >= 0 && Utilidades.confirmar()==0) {   
+            insertarAmbos(Utilidades.validaInt(valor1), Utilidades.validaInt(valor2));
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
         }
     }//GEN-LAST:event_btnAsociarActionPerformed
 
@@ -1546,6 +1549,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     pps.executeUpdate();
                     jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
                     btnGuardarCambios.setVisible(false);
+                    jTextAreaRegistroModificar.setText("Actor modificado correctamente");
                 } catch (SQLException ex) {
                     Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1559,6 +1563,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     pps.executeUpdate();
                     jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
                     btnGuardarCambios.setVisible(false);
+                    jTextAreaRegistroModificar.setText("Película modificada correctamente");
                 } catch (SQLException ex) {
                     Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1570,14 +1575,16 @@ public class FramePrincipal extends javax.swing.JFrame {
         int fila = jTableModificar.getSelectedRow();
 
         if (jComboBoxModificar.getSelectedIndex()==0 && (fila >=0)) {
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
                 String valor = jTableModificar.getValueAt(fila, 0).toString();           
                 eliminarRegistroActores(valor);
+                jTextAreaRegistroModificar.setText("Actor eliminado correctamente");
             }
         }else if (jComboBoxModificar.getSelectedIndex()==1 && (fila >=0)) {
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
                 String valor = jTableModificar.getValueAt(fila, 0).toString();
                 eliminarRegistroPeliculas(valor);
+                jTextAreaRegistroModificar.setText("Película eliminada correctamente");
             }
         }
     }//GEN-LAST:event_btnEliminar2ActionPerformed
@@ -1608,7 +1615,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     datos [4] = rs.getString(5);
                     modeloActor.addRow(datos);
                 }
-
+                jTextAreaRegistroModificar.setText("Actores buscados correctamente");
                 rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1637,6 +1644,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
                 jTableModificar.setModel(modeloPelicula);
                 rs.close();
+                jTextAreaRegistroModificar.setText("Películas buscadas correctamente");
             } catch (SQLException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1671,13 +1679,14 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
-        int anio = validaInt(txtAnioPelicula.getText());
-        int duracion = validaInt(txtDuracionPelicula.getText());
+        int anio = Utilidades.validaInt(txtAnioPelicula.getText());
+        int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
         if (txtTituloPelicula.getText().equals("") | txtAnioPelicula.getText().equals("") | txtDuracionPelicula.getText().equals("")){
             jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
         }else{
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
                 insertarPelicula(txtTituloPelicula.getText(), anio, duracion, jTextAreaResumenPelicula.getText());
+                jTextAreaRegistroActor.setText("La película "+txtTituloPelicula.getText()+" ha sido insertada correctamente");
             }
         }
         bloquearRegistro();
@@ -1693,12 +1702,13 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloPeliculaActionPerformed
 
     private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
-        int numero = validaInt(txtNacimiento.getText());
+        int numero = Utilidades.validaInt(txtNacimiento.getText());
         if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")){
             jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
         }else{
-            if (confirmar()==0) {
+            if (Utilidades.confirmar()==0) {
                 insertarActor(txtNombreActor.getText(), txtApellidoActor.getText(), numero, txtNacionalidadActor.getText());
+                jTextAreaRegistroActor.setText("Actor "+txtNombreActor.getText()+" insertado correctamente");
             }
         }
         bloquearRegistro();
@@ -1901,19 +1911,15 @@ public class FramePrincipal extends javax.swing.JFrame {
         Login l1 = new Login();
     }//GEN-LAST:event_btnDeslogActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        copiarImagen();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void buscarPeliculasActor() {
         int fila = jTableBuscar.getSelectedRow();
         String valor = jTableBuscar.getValueAt(fila, 0).toString();
-        int valor2 = validaInt(valor);
+        int valor2 = Utilidades.validaInt(valor);
         
         DefaultTableModel modeloRelacion = new DefaultTableModel();
         modeloRelacion.addColumn("Id Actor");
         modeloRelacion.addColumn("ID Película");          
-        jTableBuscar.setModel(modeloRelacion);
+        jTableAsociados.setModel(modeloRelacion);
         String datos [] = new String [2];
        
         try {
@@ -1936,12 +1942,12 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void buscarActoresPeliculas() {
         int fila = jTableBuscar.getSelectedRow();
         String valor = jTableBuscar.getValueAt(fila, 0).toString();
-        int valor2 = validaInt(valor);
+        int valor2 = Utilidades.validaInt(valor);
         
         DefaultTableModel modeloRelacion = new DefaultTableModel();
         modeloRelacion.addColumn("Id Actor");
         modeloRelacion.addColumn("ID Película");          
-        jTableBuscar.setModel(modeloRelacion);
+        jTableAsociados.setModel(modeloRelacion);
         String datos [] = new String [2];
        
         try {
@@ -1973,34 +1979,19 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRelacionesActionPerformed
 
-    private void cargarImagen(String imagen) {       
+    private void btnBorrarRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRelacionActionPerformed
+        int fila = jTableAsociados.getSelectedRow();
+        int fila1 = jTableAsociados.getSelectedRow();
+        String valor1 = jTableAsociados.getValueAt(fila1, 0).toString();
+        String valor2 = jTableAsociados.getValueAt(fila1, 1).toString();
+       
+        if (fila >= 0 && Utilidades.confirmar()==0) {
+            desInsertarAmbos(Utilidades.validaInt(valor1), Utilidades.validaInt(valor2));
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor,seleccione una fila");
+        }          
+    }//GEN-LAST:event_btnBorrarRelacionActionPerformed
 
-        ImageIcon imgThisImg = new ImageIcon("/Imagenes/"+imagen);
-
-        jLabel1.setIcon(imgThisImg);
-    }
-    
-    private void copiarImagen(){
-        JFileChooser file = new JFileChooser();
-        file.showOpenDialog(this);
-        File archivo = file.getSelectedFile();
-        
-        if(archivo != null){
-            try {
-                String dest = System.getProperty("user.dir")+ "/Imagenes/" + archivo.getName();
-                String nombre = archivo.getName();
-                Path destino = Paths.get(dest);
-                String orig = archivo.getPath();
-                Path origen = Paths.get(orig);
-                Files.copy(origen, destino, REPLACE_EXISTING);             
-                JOptionPane.showMessageDialog(null, "Copiado");
-                cargarImagen(nombre);
-            }catch(IOException ex) {   
-                JOptionPane.showMessageDialog(null, "Error");
-            }
-        }
-    }
-    
     public void llenarComboboxAjustes() {
         jComboBoxPaneles.addItem("Principal");
         jComboBoxPaneles.addItem("Registrar actor");
@@ -2097,19 +2088,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextAreaResumenPelicula.setEditable(true);
         btnGuardarPelicula.setVisible(true);
     }
-    
-    private int validaInt (String numero) {
-        int resultado = 0;
-        try {
-            if (numero != null) {
-                resultado = Integer.parseInt(numero);
-            }
-        }catch (NumberFormatException E) { 
-            JOptionPane.showMessageDialog(null, "Número introducido incorrecto");
-        }
-        return resultado;
-    }
-    
+     
     public void crearButtonGroupBuscar() {
         buttonGroup1.add(jRadioButtonActor);
         buttonGroup1.add(jRadioButtonPelicula);
@@ -2139,6 +2118,19 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtBuscarActor.setEditable(true);
     }
     
+    private void desInsertarAmbos (int idActor,int idPelicula) {
+        try {  
+            CallableStatement cst = cn.prepareCall("{CALL desAsociar(?,?)}");
+            cst.setInt(1, idActor);
+            cst.setInt(2, idPelicula);
+            cst.execute();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Desasociados correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void insertarAmbos(int idActor,int idPelicula) {
         try {  
             CallableStatement cst = cn.prepareCall("{CALL insertarAmbos(?,?)}");
@@ -2425,6 +2417,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnActivarActor;
     private javax.swing.JButton btnActivarPelicula;
     private javax.swing.JButton btnAsociar;
+    private javax.swing.JButton btnBorrarRelacion;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarActor2;
     private javax.swing.JButton btnBuscarAsociar;
@@ -2443,7 +2436,6 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnReestrablecer;
     private javax.swing.JButton btnRelaciones;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -2510,6 +2502,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2520,6 +2513,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableAsociados;
     private javax.swing.JTable jTableAsociarActores;
     private javax.swing.JTable jTableAsociarPelicula;
     private javax.swing.JTable jTableBuscar;

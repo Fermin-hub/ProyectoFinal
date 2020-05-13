@@ -18,8 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FramePrincipal f = new FramePrincipal();
-        //Login l1 = new Login();
+        //FramePrincipal f = new FramePrincipal();
+        Login l1 = new Login();
         
     }
     

@@ -40,7 +40,24 @@ public class Utilidades {
         int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar registro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return confirm;       
     }
+    
+    public static boolean validaFecha (int numero) {
+        if (numero <= 2020) {
+            return true;
+        }else{
+            return false;           
+        }  
+    }
    
+    public static boolean validaString(String cadena) {
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                return false;
+            }
+        }
+        return true;
+    }
     
     
     

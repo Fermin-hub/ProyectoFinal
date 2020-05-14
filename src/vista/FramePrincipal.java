@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Actor;
+import modelo.Pelicula;
 import utilidades.Utilidades;
 
 /**
@@ -26,6 +28,8 @@ public class FramePrincipal extends javax.swing.JFrame {
     Connection cn = con.getConexion();
     private String texto, atributo = "Id";
     String datos [] = new String [5];
+    Actor a = new Actor ();
+    Pelicula p = new Pelicula();
 
     private String setTextArea() {
         return "Cargando programa...\n";  
@@ -1681,12 +1685,17 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
         int anio = Utilidades.validaInt(txtAnioPelicula.getText());
         int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
+        
         if (txtTituloPelicula.getText().equals("") | txtAnioPelicula.getText().equals("") | txtDuracionPelicula.getText().equals("")){
             jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
         }else{
             if (Utilidades.confirmar()==0) {
-                insertarPelicula(txtTituloPelicula.getText(), anio, duracion, jTextAreaResumenPelicula.getText());
-                jTextAreaRegistroActor.setText("La película "+txtTituloPelicula.getText()+" ha sido insertada correctamente");
+                p.setTitulo(txtTituloPelicula.getText());
+                p.setAnio(anio);
+                p.setDuracion(duracion);
+                p.setResumen(jTextAreaResumenPelicula.getText());
+                insertarPelicula(p.getTitulo(), p.getAnio(), p.getDuracion(), p.getResumen());
+                jTextAreaRegistroPelicula.setText("La película "+p.getTitulo()+" ha sido insertada correctamente");
             }
         }
         bloquearRegistro();
@@ -1702,17 +1711,30 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloPeliculaActionPerformed
 
     private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
-        int numero = Utilidades.validaInt(txtNacimiento.getText());
-        if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")){
-            jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
+        Boolean nombre,apellido,nacionalidad,nacimiento;
+        nacimiento = Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText()));
+        nombre = Utilidades.validaString(txtNombreActor.getText());
+        apellido = Utilidades.validaString(txtApellidoActor.getText());
+        nacionalidad = Utilidades.validaString(txtNacionalidadActor.getText());
+        
+        if (nombre == true && apellido == true && nacionalidad == true && nacimiento == true) {       
+            if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")) {
+                jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
+            }else{
+                if (Utilidades.confirmar()==0) {
+                    a.setNombre(txtNombreActor.getText());
+                    a.setApellidos(txtApellidoActor.getText());
+                    a.setEdad(Utilidades.validaInt(txtNacimiento.getText()));
+                    a.setNacionalidad(txtNacionalidadActor.getText());
+                    insertarActor(a.getNombre(),a.getApellidos(),a.getEdad(),a.getNacionalidad());
+                    jTextAreaRegistroActor.setText("Actor "+txtNombreActor.getText()+" insertado correctamente");
+                    bloquearRegistro();
+                    limpiarRegistro();
+                }
+            } 
         }else{
-            if (Utilidades.confirmar()==0) {
-                insertarActor(txtNombreActor.getText(), txtApellidoActor.getText(), numero, txtNacionalidadActor.getText());
-                jTextAreaRegistroActor.setText("Actor "+txtNombreActor.getText()+" insertado correctamente");
-            }
+            JOptionPane.showMessageDialog(null, "Datos mal introducidos");
         }
-        bloquearRegistro();
-        limpiarRegistro();
     }//GEN-LAST:event_btnGuardarActorActionPerformed
 
     private void btnActivarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActorActionPerformed

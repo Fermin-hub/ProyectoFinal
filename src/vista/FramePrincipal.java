@@ -1440,11 +1440,13 @@ public class FramePrincipal extends javax.swing.JFrame {
             if (Utilidades.confirmar()==0) {
                 String valor = jTableBuscar.getValueAt(fila, 0).toString();
                 eliminarRegistroActores(valor);
+                mostrarTablaActor();
             }
         }else if (jRadioButtonPelicula.isSelected() && (fila >=0)) {
             if (Utilidades.confirmar()==0) {
-            String valor = jTableBuscar.getValueAt(fila, 0).toString();
-            eliminarRegistroPeliculas(valor);
+                String valor = jTableBuscar.getValueAt(fila, 0).toString();
+                eliminarRegistroPeliculas(valor);
+                mostrarTablaPelicula();
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -1543,20 +1545,29 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         int fila = jTableModificar.getSelectedRow();
-
+        
         if ((jComboBoxModificar.getSelectedIndex()==0)) {
-            if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {
-                jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
-            }else{
-                try {
-                    PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
-                    pps.executeUpdate();
-                    jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
-                    btnGuardarCambios.setVisible(false);
-                    jTextAreaRegistroModificar.setText("Actor modificado correctamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Boolean nombre,apellido,nacionalidad,nacimiento;
+            nacimiento = Utilidades.validaFecha(Utilidades.validaInt(txtModificarActorEdad.getText()));
+            nombre = Utilidades.validaString(txtModificarActorNombre.getText());
+            apellido = Utilidades.validaString(txtModificarActorApellido.getText());
+            nacionalidad = Utilidades.validaString(txtModificarActorNacionalidad.getText());
+            if (nombre == true && apellido == true && nacionalidad == true && nacimiento == true) { 
+                if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {
+                    jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+                }else{
+                    try {
+                        PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                        pps.executeUpdate();
+                        jTextAreaRegistroModificar.setText("Se ha modificado el Actor "+txtModificarActorNombre.getText()+ " correctamente");
+                        btnGuardarCambios.setVisible(false);
+                        jTextAreaRegistroModificar.setText("Actor modificado correctamente");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            }else {
+                JOptionPane.showMessageDialog(null, "Datos mal introducidos");
             }
         }else if ((jComboBoxModificar.getSelectedIndex()==1)) {
             if (txtModificarPeliculaTitulo.getText().equals("") | txtModificarPeliculaAnio.getText().equals("") | txtModificarPeliculaDuracion.getText().equals("")) {
@@ -1668,6 +1679,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             txtModificarActorEdad.setText(jTableModificar.getValueAt(fila, 3).toString());
             txtModificarActorNacionalidad.setText(jTableModificar.getValueAt(fila, 4).toString());
             btnGuardarCambios.setVisible(true);
+            a.setNombre(jTableModificar.getValueAt(fila, 1).toString());
+            a.setApellidos(jTableModificar.getValueAt(fila, 2).toString());
+            a.setEdad(Utilidades.validaInt(jTableModificar.getValueAt(fila, 3).toString()));
+            a.setNacionalidad(jTableModificar.getValueAt(fila, 4).toString());
         }else if ((jComboBoxModificar.getSelectedIndex()==0) && (fila < 0)) {
             jTextAreaRegistroModificar.setText("Por favor, seleccione primero un Actor");
         }else if ((jComboBoxModificar.getSelectedIndex()==1) && (fila >= 0)) {
@@ -1677,6 +1692,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             txtModificarPeliculaDuracion.setText(jTableModificar.getValueAt(fila, 3).toString());
             jTextAreaModificarResumen.setText(jTableModificar.getValueAt(fila, 4).toString());
             btnGuardarCambios.setVisible(true);
+            p.setTitulo(jTableModificar.getValueAt(fila, 1).toString());
+            p.setAnio(Utilidades.validaInt(jTableModificar.getValueAt(fila, 2).toString()));
+            p.setDuracion(Utilidades.validaInt(jTableModificar.getValueAt(fila, 3).toString()));
+            p.setResumen(jTableModificar.getValueAt(fila, 4).toString());
         }else if ((jComboBoxModificar.getSelectedIndex()==1) && (fila < 0)) {
             jTextAreaRegistroModificar.setText("Por favor, seleccione primero una película");
         }

@@ -50,13 +50,12 @@ public class Utilidades {
     }
    
     public static boolean validaString(String cadena) {
+        boolean flag = false;
         for (int x = 0; x < cadena.length(); x++) {
             char c = cadena.charAt(x);
-            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
-                return false;
-            }
+            flag = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == ' '); 
         }
-        return true;
+        return flag;
     }
     
     

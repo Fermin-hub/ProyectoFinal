@@ -5,25 +5,22 @@
  */
 package utilidades;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-import java.util.ArrayList;
-import javax.swing.JFileChooser;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
-import modelo.Actor;
+
 
 
 /**
  *
- * @author fer
+ * @author Fermin
  */
 public class Utilidades {
-    
+/**
+ * metodo para convertir a int un String   
+ * @param String
+ * @return int
+ */
     public static int validaInt (String numero) {
         int resultado = 0;
         try {
@@ -35,20 +32,33 @@ public class Utilidades {
         }
         return resultado;
     }
-    
+/**
+ * metodo para confirmar accion   
+ * @return accion
+ */
     public static int confirmar() {       
         int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar registro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return confirm;       
     }
-    
+/**
+ * metodo para validar fecha   
+ * @param numero
+ * @return fecha
+ */
     public static boolean validaFecha (int numero) {
-        if (numero <= 2020) {
+    	LocalDate date = LocalDate.now();
+    	int anio = date.getYear();
+        if (numero <= anio) {
             return true;
         }else{
             return false;           
         }  
     }
-   
+/**
+ * metodo para validar un String sin numeros   
+ * @param cadena
+ * @return cadena
+ */
     public static boolean validaString(String cadena) {
         boolean flag = false;
         for (int x = 0; x < cadena.length(); x++) {
@@ -56,8 +66,5 @@ public class Utilidades {
             flag = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == ' '); 
         }
         return flag;
-    }
-    
-    
-    
+    } 
 }

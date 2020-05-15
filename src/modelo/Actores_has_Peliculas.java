@@ -10,7 +10,11 @@ package modelo;
  * @author fer
  */
 public class Actores_has_Peliculas {
-    
+/**
+ * Atributos
+ * @param Actor
+ * @param pelicula   
+ */
     private Actor actor;
     private Pelicula pelicula;
     

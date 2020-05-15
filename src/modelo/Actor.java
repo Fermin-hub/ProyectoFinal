@@ -10,21 +10,38 @@ package modelo;
  * @author fer
  */
 public class Actor {
-    
+/**
+ * definimos atributos
+ * @param nombre nombre actor
+ * @param apellidos actor
+ * @param nacionalidad actor 
+ * @param edad actor  
+ */
     private String nombre,apellidos,nacionalidad;
     private int edad;
-    
+/**
+ * Constructor vacio   
+ */
     public Actor () {
     	
     }
-    
+/**
+ * constructor parametizado   
+ * @param nombre
+ * @param apellidos
+ * @param edad
+ * @param nacionalidad
+ */
     public Actor(String nombre,String apellidos,int edad,String nacionalidad){
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.nacionalidad = nacionalidad;
     }
-
+/**
+ * Gets and Sets
+ * @return
+ */
 	public String getNombre() {
 		return nombre;
 	}
@@ -56,7 +73,9 @@ public class Actor {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-
+/**
+ * metodo toString
+ */
 	@Override
 	public String toString() {
 		return "Actor [nombre=" + nombre + ", apellidos=" + apellidos + ", nacionalidad=" + nacionalidad + ", edad="

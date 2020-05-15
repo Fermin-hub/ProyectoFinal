@@ -22,11 +22,18 @@ public class Login extends javax.swing.JFrame {
         setVisible(true);
         setResizable(false);
     }
-
+/**
+ * definimos atributos
+ * @param usuarioUsuario String usuario
+ * @param usuarioAdmin String Admin
+ * @param password contrasenia
+ */
     private final String usuarioUsuario = "Usuario";
     private final String usuarioAdmin = "Admin";
     private final String password = "password";
-
+/**
+ * iniciar componentes
+ */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,12 +56,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Usuario:");
 
         jLabel2.setText("Contraseña:");
-
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -139,11 +140,10 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
+/**
+ * Acev login
+ * @param evt
+ */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int log;
         String usuario = txtUsuario.getText();
@@ -161,12 +161,6 @@ public class Login extends javax.swing.JFrame {
             txtUsuario.setText("");
             jPasswordField.setText("");
         }
-        //String pass = jPasswordField.getPassword().toString();
-
-
-
-
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

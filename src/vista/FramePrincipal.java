@@ -18,10 +18,21 @@ import utilidades.Utilidades;
 
 /**
  *
- * @author fer
+ * @author Fermin
  */
 public class FramePrincipal extends javax.swing.JFrame {
-    
+/**
+ * Declaramos variables
+ * @param con2 conexion usuario
+ * @param cn2 conexion usuario    
+ * @param con conexion admin
+ * @param cn conexion admin
+ * @param texto variable String para texto
+ * @param atributo String para id
+ * @param datos, array para almacenar de la BD
+ * @param a Objeto actor
+ * @param p Objeto pelicula
+ */
     ConexionBD con2 = new ConexionBD(1);
     Connection cn2 = con2.getConexion();
     ConexionBD con = new ConexionBD();
@@ -30,11 +41,16 @@ public class FramePrincipal extends javax.swing.JFrame {
     String datos [] = new String [5];
     Actor a = new Actor ();
     Pelicula p = new Pelicula();
-
+/**
+ * Método para cargar texto
+ * @return texto
+ */
     private String setTextArea() {
         return "Cargando programa...\n";  
     }
-    
+/**
+ * Constructor Admin   
+ */
     public FramePrincipal() {
         initComponents();
         jTextArea1.setText(setTextArea()+"\n"+con.getString());
@@ -53,7 +69,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         setResizable(false);
         admin();
     }
-    
+/**
+ * Constructor Usuario    
+ * @param log
+ */
     public FramePrincipal(int log) {
         initComponents();
         jTextArea1.setText(setTextArea()+"\n"+con.getString());
@@ -73,7 +92,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         setResizable(false);
         log = 1;
     }
-        
+ /**
+  * Método con los valores para usuario      
+  */
     public void usuario() {
         btnActivarActor.setEnabled(false);
         btnActivarPelicula.setEnabled(false);
@@ -105,7 +126,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jCheckBox6.setEnabled(false);
         jCheckBox3.setEnabled(false);
     }
-    
+/**
+ * Metodo con los valores para Admin    
+ */
     public void admin() {
         jLabelAdmin.setText("Admin (Activo)");
         lblUsuario.setText("Usuario");
@@ -122,7 +145,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jRadioButtonModificarUsuario.setEnabled(false);
         jRadioButtonAsociarUsuario.setEnabled(false); 
     }
-
+/**
+ * Metodo para llenar combobox Actor
+ */
     public void agregarItemsComboBoxActor() {
         jComboBoxActor.addItem("idActores");
         jComboBoxActor.addItem("Nombre");
@@ -130,7 +155,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxActor.addItem("ANacimiento");
         jComboBoxActor.addItem("Nacionalidad");
     }
-    
+/**
+ * Metodo para llenar combobox Pelicula
+ */
     public void agregarItemsComboBoxPelicula() {
         jComboBoxPelicula.addItem("idPeliculas");
         jComboBoxPelicula.addItem("Titulo");
@@ -138,12 +165,16 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxPelicula.addItem("Duracion");
         jComboBoxPelicula.addItem("Resumen");        
     }
-    
+/**
+ * Metodo para llenar combobox modificar
+ */
     public void agregarItemsComboBoxModificar() {
         jComboBoxModificar.addItem("Actores");
         jComboBoxModificar.addItem("Películas");
     }
-    
+/** 
+ * Iniciar componentes   
+ */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -368,12 +399,6 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jLabel8.setText("Nacionalidad:");
 
-        txtNombreActor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -498,18 +523,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel11.setText("Duración:");
 
         jLabel12.setText("Resumen:");
-
-        txtTituloPelicula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTituloPeliculaActionPerformed(evt);
-            }
-        });
-
-        txtAnioPelicula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAnioPeliculaActionPerformed(evt);
-            }
-        });
 
         jTextAreaResumenPelicula.setColumns(20);
         jTextAreaResumenPelicula.setRows(5);
@@ -1424,7 +1437,10 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Actv exportar
+ * @param evt
+ */
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         if (jRadioButtonActor.isSelected()) {
             exportarActor();
@@ -1432,7 +1448,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             exportarPelicula();
         }
     }//GEN-LAST:event_btnExportarActionPerformed
-
+/**
+ * Actv eliminar
+ * @param evt
+ */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = jTableBuscar.getSelectedRow();
 
@@ -1450,13 +1469,19 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+/**
+ * Actv Buscar pelicula 2
+ * @param evt
+ */
     private void btnBuscarPelicula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPelicula2ActionPerformed
         atributo = jComboBoxPelicula.getSelectedItem().toString();
         mostrarTablaPelicula2("%"+txtBuscarPelicula.getText()+"%");
         txtBuscarPelicula.setText("");
     }//GEN-LAST:event_btnBuscarPelicula2ActionPerformed
-
+/**
+ * Actv Buscar
+ * @param evt
+ */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (jRadioButtonActor.isSelected()) {
             mostrarTablaActor();
@@ -1464,23 +1489,36 @@ public class FramePrincipal extends javax.swing.JFrame {
             mostrarTablaPelicula();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+/**
+ * Actv buscar actor 2
+ * @param evt
+ */
     private void btnBuscarActor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActor2ActionPerformed
         atributo = jComboBoxActor.getSelectedItem().toString();
         mostrarTablaActor2("%"+txtBuscarActor.getText()+"%");
         txtBuscarActor.setText("");
     }//GEN-LAST:event_btnBuscarActor2ActionPerformed
-
+/**
+ * Actv pelicula
+ * @param evt
+ */
     private void jRadioButtonPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeliculaActionPerformed
         desbloquearBusquedaPelicula();
         bloquearBusquedaActor();
     }//GEN-LAST:event_jRadioButtonPeliculaActionPerformed
-
+/**
+ * Actv actor
+ * @param evt
+ */
     private void jRadioButtonActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonActorActionPerformed
         desbloquearBusquedaActor();
         bloquearBusquedaPelicula();
     }//GEN-LAST:event_jRadioButtonActorActionPerformed
-
+/**
+ * Actv buscar asociar
+ * busca peliculas y actores
+ * @param evt
+ */
     private void btnBuscarAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAsociarActionPerformed
         DefaultTableModel modeloActor = new DefaultTableModel();
         modeloActor.addColumn("Id");
@@ -1490,7 +1528,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         modeloActor.addColumn("Nacionalidad");
         jTableAsociarActores.setModel(modeloActor);
 
-        String datos [] = new String [5];
         CallableStatement cst;
         ResultSet rs;
 
@@ -1529,7 +1566,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarAsociarActionPerformed
-
+/**
+ * Actv asociar actores y peliculas
+ * @param evt
+ */
     private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
         int fila1 = jTableAsociarActores.getSelectedRow();
         int fila2 = jTableAsociarPelicula.getSelectedRow();
@@ -1542,7 +1582,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
         }
     }//GEN-LAST:event_btnAsociarActionPerformed
-
+/**
+ * Actv guardar cambios
+ * Metodo para guardar cambios en actores y peliculas
+ * @param evt
+ */
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         int fila = jTableModificar.getSelectedRow();
         
@@ -1585,7 +1629,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
-
+/**
+ * Actv eliminar 2
+ * @param evt
+ */
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
         int fila = jTableModificar.getSelectedRow();
 
@@ -1603,7 +1650,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEliminar2ActionPerformed
-
+/**
+ * Actv buscar para modificar
+ * metodo para listar actores y peliculas
+ * @param evt
+ */
     private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
 
         limpiarModificar();
@@ -1666,7 +1717,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnBuscarModificarActionPerformed
-
+/**
+ * Actv modificar
+ * metodo para modificar actores o peliculas
+ * @param evt
+ */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int fila = jTableModificar.getSelectedRow();
 
@@ -1700,7 +1755,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             jTextAreaRegistroModificar.setText("Por favor, seleccione primero una película");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
-
+/**
+ * Actv para guardar peliculas
+ * @param evt
+ */
     private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
         int anio = Utilidades.validaInt(txtAnioPelicula.getText());
         int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
@@ -1720,15 +1778,18 @@ public class FramePrincipal extends javax.swing.JFrame {
         bloquearRegistro();
         limpiarRegistro();
     }//GEN-LAST:event_btnGuardarPeliculaActionPerformed
-
+/**
+ * Actv para activar registro
+ * @param evt
+ */
     private void btnActivarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarPeliculaActionPerformed
         desbloquearRegistroPelicula();
     }//GEN-LAST:event_btnActivarPeliculaActionPerformed
-
-    private void txtTituloPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloPeliculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTituloPeliculaActionPerformed
-
+/**
+ * Actv guardar actor
+ * metodo para guardar actores
+ * @param evt
+ */
     private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
         Boolean nombre,apellido,nacionalidad,nacimiento;
         nacimiento = Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText()));
@@ -1755,25 +1816,34 @@ public class FramePrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Datos mal introducidos");
         }
     }//GEN-LAST:event_btnGuardarActorActionPerformed
-
+/**
+ * Actv guardar registro
+ * @param evt
+ */
     private void btnActivarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActorActionPerformed
         desbloquearRegistroActor();
     }//GEN-LAST:event_btnActivarActorActionPerformed
-
-    private void txtNombreActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActorActionPerformed
-
+/**
+ * Actv para llamar ajustes
+ * @param evt
+ */
     private void btnLLamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLLamarActionPerformed
         Ajustes s = new Ajustes();
     }//GEN-LAST:event_btnLLamarActionPerformed
-
+/**
+ * Actv para text en label
+ * @param evt
+ */
     private void jComboBoxPanelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPanelesActionPerformed
         if (jComboBoxPaneles.getSelectedIndex()==0) {
             lblFondo.setText("Color del fondo:");   
         }
     }//GEN-LAST:event_jComboBoxPanelesActionPerformed
-
+/**
+ * Actv guardar cambios
+ * metodo para guardar cambios
+ * @param evt
+ */
     private void btnGuardarAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAjustesActionPerformed
         if (jComboBoxPaneles.getSelectedIndex()==0) {
             if (jComboBoxColores.getSelectedIndex()==0) {
@@ -1917,7 +1987,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             }      
         }
     }//GEN-LAST:event_btnGuardarAjustesActionPerformed
-
+/**
+ * Actv para ajustes
+ * metodo para reestablecer ajustes
+ * @param evt
+ */
     private void btnReestrablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReestrablecerActionPerformed
         if (jComboBoxPaneles.getSelectedIndex()==0) {
             jPanel2.setBackground(new java.awt.Color(204,204,255));
@@ -1942,16 +2016,17 @@ public class FramePrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
         }
     }//GEN-LAST:event_btnReestrablecerActionPerformed
-
-    private void txtAnioPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnioPeliculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAnioPeliculaActionPerformed
-
+/**
+ * Actv para desloguear y llamar a login
+ * @param evt
+ */
     private void btnDeslogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogActionPerformed
         this.dispose();
         Login l1 = new Login();
     }//GEN-LAST:event_btnDeslogActionPerformed
-
+/**
+ * metodo para buscar peliculas de actores
+ */
     private void buscarPeliculasActor() {
         int fila = jTableBuscar.getSelectedRow();
         String valor = jTableBuscar.getValueAt(fila, 0).toString();
@@ -1979,7 +2054,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+/**
+ * Metodo para buscar actores de peliculas    
+ */
     private void buscarActoresPeliculas() {
         int fila = jTableBuscar.getSelectedRow();
         String valor = jTableBuscar.getValueAt(fila, 0).toString();
@@ -2007,7 +2084,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
- 
+/**
+ * Actv para relaciones 
+ * @param evt
+ */
     private void btnRelacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelacionesActionPerformed
         int fila = jTableBuscar.getSelectedRow();
 
@@ -2019,7 +2099,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor,seleccione una fila");
         }
     }//GEN-LAST:event_btnRelacionesActionPerformed
-
+/**
+ * Actv borrar relacion entre peliculas y actores
+ * @param evt
+ */
     private void btnBorrarRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRelacionActionPerformed
         int fila = jTableAsociados.getSelectedRow();
         int fila1 = jTableAsociados.getSelectedRow();
@@ -2032,7 +2115,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor,seleccione una fila");
         }          
     }//GEN-LAST:event_btnBorrarRelacionActionPerformed
-
+/**
+ * metodo para llenar combobox ajustes
+ */
     public void llenarComboboxAjustes() {
         jComboBoxPaneles.addItem("Principal");
         jComboBoxPaneles.addItem("Registrar actor");
@@ -2042,7 +2127,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxPaneles.addItem("Buscar");
         jComboBoxPaneles.addItem("Configuración");
     }
-    
+/**
+ * metodo para llenar combobox colores
+ */
     public void llenarComboboxColores() {
         jComboBoxColores.addItem("Negro");
         jComboBoxColores.addItem("Azul");
@@ -2051,7 +2138,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxColores.addItem("Blanco");
         jComboBoxColores.addItem("Verde");
     }
-    
+/**
+ * metodo para desactivar actores modificar 
+ */
     public void desactivarActorModificar() {
         txtModificarActorNombre.setEditable(false);
         txtModificarActorApellido.setEditable(false);
@@ -2063,7 +2152,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtModificarPeliculaDuracion.setEditable(true);
         jTextAreaModificarResumen.setEditable(true);
     }
-    
+/**
+ * metodo para desactivar peliculas modificar     
+ */
     public void desactivarPeliculaModificar() {
         txtModificarActorNombre.setEditable(true);
         txtModificarActorApellido.setEditable(true);
@@ -2075,7 +2166,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtModificarPeliculaDuracion.setEditable(false);
         jTextAreaModificarResumen.setEditable(false);
     }
-    
+/**
+ * metodo para limpiar txt de modificar   
+ */
     public void limpiarModificar() {
         txtModificarActorNombre.setText("");
         txtModificarActorApellido.setText("");
@@ -2087,7 +2180,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtModificarPeliculaDuracion.setText("");
         jTextAreaModificarResumen.setText("");
     }
-    
+/**
+ * metodo para limpiar registro    
+ */
     public void limpiarRegistro() {
         txtNombreActor.setText("");
         txtApellidoActor.setText("");
@@ -2099,7 +2194,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtDuracionPelicula.setText("");
         jTextAreaResumenPelicula.setText("");
     }
-    
+/**
+ * metodo para bloquear registro   
+ */
     private void bloquearRegistro() {
         txtNombreActor.setEditable(false);
         txtApellidoActor.setEditable(false);
@@ -2113,7 +2210,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextAreaResumenPelicula.setEditable(false);
         btnGuardarPelicula.setVisible(false);
     }
-    
+/**
+ * metodo para desbloquear registro de actores   
+ */
     private void desbloquearRegistroActor() {
         txtNombreActor.setEditable(true);
         txtApellidoActor.setEditable(true);
@@ -2121,7 +2220,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         txtNacionalidadActor.setEditable(true);
         btnGuardarActor.setVisible(true);
     }
-    
+/**
+ * metodo para desbloquear registro de peliculas    
+ */
     private void desbloquearRegistroPelicula() {
         txtTituloPelicula.setEditable(true);
         txtAnioPelicula.setEditable(true);
@@ -2129,36 +2230,50 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextAreaResumenPelicula.setEditable(true);
         btnGuardarPelicula.setVisible(true);
     }
-     
+/**
+ * metodo para llenar buttongroup     
+ */
     public void crearButtonGroupBuscar() {
         buttonGroup1.add(jRadioButtonActor);
         buttonGroup1.add(jRadioButtonPelicula);
         jComboBoxPelicula.setVisible(false);
         txtBuscarPelicula.setEditable(false);
     }
-
+/**
+ * metodo para desbloquear la busqueda de pelicula
+ */
     public void desbloquearBusquedaPelicula() {
         jComboBoxPelicula.setVisible(true);
         txtBuscarPelicula.setEditable(true); 
     }
-    
+/**
+ * metodo para bloquear busquedas de actor   
+ */
     public void bloquearBusquedaActor() {
         jComboBoxActor.setVisible(false);
         txtBuscarActor.setEditable(false);
         txtBuscarActor.setText("");
     }
-    
+/**
+ * metodo para bloquear busqueda de pelicula   
+ */
     public void bloquearBusquedaPelicula() {
         jComboBoxPelicula.setVisible(false);
         txtBuscarPelicula.setEditable(false);
         txtBuscarPelicula.setText("");
     }
-    
+/**
+ * metodo para desbloquear busqueda de actor    
+ */
     public void desbloquearBusquedaActor() {
         jComboBoxActor.setVisible(true);
         txtBuscarActor.setEditable(true);
     }
-    
+/**
+ * metodo para desinsertar peliculas y actores    
+ * @param idActor
+ * @param idPelicula
+ */
     private void desInsertarAmbos (int idActor,int idPelicula) {
         try {  
             CallableStatement cst = cn.prepareCall("{CALL desAsociar(?,?)}");
@@ -2171,7 +2286,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/**
+ * metodo para asociar peliculas y actores
+ * @param idActor
+ * @param idPelicula
+ */
     private void insertarAmbos(int idActor,int idPelicula) {
         try {  
             CallableStatement cst = cn.prepareCall("{CALL insertarAmbos(?,?)}");
@@ -2184,7 +2303,13 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+/**
+ * metodo apra insertar actores    
+ * @param Nombre
+ * @param Apellido
+ * @param ANacimiento
+ * @param Nacionalidad
+ */
     private void insertarActor (String Nombre,String Apellido, int ANacimiento,String Nacionalidad) {
         try {  
             CallableStatement cst = cn.prepareCall("{CALL insertarActor(?,?,?,?)}");
@@ -2199,7 +2324,13 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }      
     }
-    
+/**
+ * metodo para insertar peliculas    
+ * @param Titulo
+ * @param Anio
+ * @param Duracion
+ * @param Resumen
+ */
     private void insertarPelicula (String Titulo,int Anio,int Duracion,String Resumen){
         try {  
             CallableStatement cst = cn.prepareCall("{CALL insertarPelicula(?,?,?,?)}");
@@ -2214,7 +2345,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
-    
+/**
+ * metodo para eliminar actores    
+ * @param v_nid
+ */
     public void eliminarRegistroActores(String v_nid) {      
         try {  
             CallableStatement cst = cn.prepareCall("{call eliminarRegistrosActores(?)}");
@@ -2227,7 +2361,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    
+ /**
+  * metodo para eliminar peliculas   
+  * @param v_nid
+  */
     public void eliminarRegistroPeliculas(String v_nid) {       
         try {  
             CallableStatement cst = cn.prepareCall("{call eliminarRegistroPeliculas(?)}");
@@ -2240,7 +2377,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-       
+/**
+ * metodo para exportar actores       
+ */
     private void exportarActor() {
         ResultSet rs = null;
         StringBuffer strBuf = null;        
@@ -2269,7 +2408,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+/**
+ * metodo para exportar peliculas    
+ */
     private void exportarPelicula() {
         ResultSet rs = null;
         StringBuffer strBuf = null;        
@@ -2297,7 +2438,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+/**
+ * metodo para buscar actores con atributo    
+ * @param valor atributo para buscar
+ */
     public void mostrarTablaActor2 (String valor) {
         DefaultTableModel modeloActor = new DefaultTableModel();
         modeloActor.addColumn("Id");
@@ -2310,8 +2454,6 @@ public class FramePrincipal extends javax.swing.JFrame {
             
         String sql = "SELECT * FROM Actores WHERE "+atributo+" LIKE '"+valor+"'";
             
-        String datos [] = new String [5];
-            
         try {   
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -2328,7 +2470,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    
+/**
+ * metodo para buscar actores    
+ */
     public void mostrarTablaActor() {
             DefaultTableModel modeloActor = new DefaultTableModel();
             modeloActor.addColumn("Id");
@@ -2341,8 +2485,6 @@ public class FramePrincipal extends javax.swing.JFrame {
             
             String sql = "SELECT * FROM Actores";
             
-            String datos [] = new String [5];
-            
         try {   
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -2359,7 +2501,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    
+/**
+ * metodo para buscar peliculas con atributo    
+ * @param valor atributo para buscar
+ */
     public void mostrarTablaPelicula2(String valor) {
         DefaultTableModel modeloPelicula = new DefaultTableModel();
     
@@ -2372,7 +2517,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTableBuscar.setModel(modeloPelicula);
             
         String sql = "SELECT * FROM Peliculas WHERE "+atributo+" LIKE '"+valor+"'";
-        String datos [] = new String [5];
             
         try {   
             Statement st = cn.createStatement();
@@ -2390,7 +2534,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    
+/**
+ * metodo para buscar peliculas    
+ */
     public void mostrarTablaPelicula() {
             DefaultTableModel modeloPelicula = new DefaultTableModel();
             modeloPelicula.addColumn("Id");
@@ -2402,8 +2548,6 @@ public class FramePrincipal extends javax.swing.JFrame {
             jTableBuscar.setModel(modeloPelicula);
             
             String sql = "SELECT * FROM Peliculas";
-            
-            String datos [] = new String [5];
             
         try {   
             Statement st = cn.createStatement();
@@ -2453,7 +2597,9 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+/**
+ * declaracion de objetos swing
+ */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivarActor;
     private javax.swing.JButton btnActivarPelicula;

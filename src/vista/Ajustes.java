@@ -17,9 +17,14 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author fer
+ * @author Fermin
  */
 public class Ajustes extends javax.swing.JFrame {
+/**
+ * Definimos atributos
+ * @param con objeto conexion
+ * @param cn conexion
+ */
     ConexionBD con = new ConexionBD();
     Connection cn = con.getConexion();
     /**
@@ -35,7 +40,9 @@ public class Ajustes extends javax.swing.JFrame {
         setBackground(Color.black);
         setResizable(false);
     }
-
+/**
+ * iniciar componentes
+ */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,9 +109,10 @@ public class Ajustes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void metaDatos() {        
-        
+/**
+ * metodopara obtener metadatos
+ */
+    private void metaDatos() {                
         ResultSet rs = null;
         try {          
             DatabaseMetaData datos = cn.getMetaData();
@@ -127,11 +135,10 @@ public class Ajustes extends javax.swing.JFrame {
             }
         } 
     }
-    
-    
-    
-    
-    
+/**
+ * Acev cerrar ventana
+ * @param evt
+ */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

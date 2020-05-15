@@ -39,15 +39,17 @@ public class ConexionBD {
          Class.forName("com.mysql.jdbc.Driver");
          //obtenemos la conexión
          cn = DriverManager.getConnection( this.url, this.user , this.password );  
-         exito = "Conexion a la base de datos correcta";
-           //System.out.println("Conexion correcta");
+         exito = "Conexion a la base de datos correcta";         
       }catch(SQLException e){
          System.err.println( e.getMessage() );
       }catch(ClassNotFoundException e){
          System.err.println( e.getMessage() );
       }
    }
-   
+/**
+ * constructor para usuario   
+ * @param numero
+ */
       public ConexionBD(int numero){
         this.url = "jdbc:mysql://fjimenez.salesianas.es/"+this.db;
        try{
@@ -63,11 +65,17 @@ public class ConexionBD {
          System.err.println( e.getMessage() );
       }
    }
-     
+/**
+ * get conexion     
+ * @return cn
+ */
    public Connection getConexion() {
     return this.cn;
    }
-   
+/**
+ * get String  
+ * @return exito
+ */
    public String getString () {
        return exito;
    }

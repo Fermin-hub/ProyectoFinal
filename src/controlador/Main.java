@@ -5,7 +5,6 @@
  */
 package controlador;
 
-import vista.FramePrincipal;
 import vista.Login;
 
 /**
@@ -21,8 +20,7 @@ public class Main {
 /**
  * LLamada a objeto iniciar programa
  */
-        FramePrincipal f = new FramePrincipal();
-        //Login l1 = new Login();
+        Login l1 = new Login();
         
     }  
 }

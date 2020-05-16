@@ -8,9 +8,6 @@ package utilidades;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
-
-
-
 /**
  *
  * @author Fermin
@@ -37,7 +34,7 @@ public class Utilidades {
  * @return accion
  */
     public static int confirmar() {       
-        int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar registro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(null, "Confirmar", "Confirmar acción", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return confirm;       
     }
 /**
@@ -59,7 +56,7 @@ public class Utilidades {
  * @param cadena
  * @return cadena
  */
-    public static boolean validaString(String cadena) {
+    public static boolean validaString2(String cadena) {
         boolean flag = false;
         for (int x = 0; x < cadena.length(); x++) {
             char c = cadena.charAt(x);
@@ -67,4 +64,8 @@ public class Utilidades {
         }
         return flag;
     } 
+    
+    public static boolean validaString(String string){
+        return !string.matches(".*\\d+.*");
+    }
 }

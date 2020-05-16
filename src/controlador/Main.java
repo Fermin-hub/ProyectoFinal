@@ -21,8 +21,8 @@ public class Main {
 /**
  * LLamada a objeto iniciar programa
  */
-        //FramePrincipal f = new FramePrincipal();
-        Login l1 = new Login();
+        FramePrincipal f = new FramePrincipal();
+        //Login l1 = new Login();
         
     }  
 }

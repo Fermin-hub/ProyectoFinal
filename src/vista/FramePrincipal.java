@@ -1791,13 +1791,7 @@ public class FramePrincipal extends javax.swing.JFrame {
  * @param evt
  */
     private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
-        Boolean nombre,apellido,nacionalidad,nacimiento;
-        nacimiento = Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText()));
-        nombre = Utilidades.validaString(txtNombreActor.getText());
-        apellido = Utilidades.validaString(txtApellidoActor.getText());
-        nacionalidad = Utilidades.validaString(txtNacionalidadActor.getText());
-        
-        if (nombre == true && apellido == true && nacionalidad == true && nacimiento == true) {       
+        if (Utilidades.validaString(txtNombreActor.getText()) == true && Utilidades.validaString(txtApellidoActor.getText()) == true && Utilidades.validaString(txtNacionalidadActor.getText()) == true && Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText())) == true) {       
             if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")) {
                 jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
             }else{

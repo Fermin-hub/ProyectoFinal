@@ -397,7 +397,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("Año nacimiento:");
 
-        jLabel8.setText("Nacionalidad:");
+        jLabel8.setText("País");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -924,19 +924,20 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(92, 92, 92))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(btnAsociar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addComponent(jLabel23)
                         .addGap(401, 401, 401))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane10)
                         .addContainerGap())))
             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1340,7 +1341,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnReestrablecer.setText("Reestablecer");
+        btnReestrablecer.setText("Restablecer");
         btnReestrablecer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReestrablecerActionPerformed(evt);
@@ -1367,7 +1368,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                                 .addComponent(jComboBoxColores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(104, 104, 104)
                                 .addComponent(btnGuardarAjustes)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                                 .addComponent(btnReestrablecer)
                                 .addGap(84, 84, 84))))
                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -1444,8 +1445,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         if (jRadioButtonActor.isSelected()) {
             exportarActor();
-        }else{
+        }else if (jRadioButtonPelicula.isSelected()){
             exportarPelicula();
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor, realice una búsqueda primero");
         }
     }//GEN-LAST:event_btnExportarActionPerformed
 /**
@@ -1467,6 +1470,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                 eliminarRegistroPeliculas(valor);
                 mostrarTablaPelicula();
             }
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 /**
@@ -1533,10 +1538,10 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         DefaultTableModel modeloPelicula = new DefaultTableModel();
         modeloPelicula.addColumn("Id");
-        modeloPelicula.addColumn("Titulo");
+        modeloPelicula.addColumn("Título");
         modeloPelicula.addColumn("Año");
         modeloPelicula.addColumn("Duración");
-        modeloPelicula.addColumn("Resúmen");
+        modeloPelicula.addColumn("Resumen");
         jTableAsociarPelicula.setModel(modeloPelicula);
 
         try {
@@ -1573,11 +1578,13 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void btnAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociarActionPerformed
         int fila1 = jTableAsociarActores.getSelectedRow();
         int fila2 = jTableAsociarPelicula.getSelectedRow();
+  
+        if (fila1 >=0 && fila2 >= 0) {  
         String valor1 = jTableAsociarActores.getValueAt(fila1, 0).toString();
         String valor2 = jTableAsociarPelicula.getValueAt(fila2, 0).toString();
-        
-        if (fila1 >=0 && fila2 >= 0 && Utilidades.confirmar()==0) {   
-            insertarAmbos(Utilidades.validaInt(valor1), Utilidades.validaInt(valor2));
+            if (Utilidades.confirmar()==0){
+                insertarAmbos(Utilidades.validaInt(valor1), Utilidades.validaInt(valor2));
+            }
         }else {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
         }
@@ -1648,6 +1655,10 @@ public class FramePrincipal extends javax.swing.JFrame {
                 eliminarRegistroPeliculas(valor);
                 jTextAreaRegistroModificar.setText("Película eliminada correctamente");
             }
+        }else{
+                jTextAreaRegistroModificar.setText("Seleccione un Actor o Pleícula primero");
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor o Pleícula primero");
+
         }
     }//GEN-LAST:event_btnEliminar2ActionPerformed
 /**
@@ -1681,7 +1692,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     datos [4] = rs.getString(5);
                     modeloActor.addRow(datos);
                 }
-                jTextAreaRegistroModificar.setText("Actores buscados correctamente");
+                jTextAreaRegistroModificar.setText("Actores encontrados correctamente");
                 rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1689,10 +1700,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         }else if (jComboBoxModificar.getSelectedIndex()==1){
             DefaultTableModel modeloPelicula = new DefaultTableModel();
             modeloPelicula.addColumn("Id");
-            modeloPelicula.addColumn("Titulo");
+            modeloPelicula.addColumn("Título");
             modeloPelicula.addColumn("Año");
             modeloPelicula.addColumn("Duración");
-            modeloPelicula.addColumn("Resúmen");
+            modeloPelicula.addColumn("Resumen");
             jTableModificar.setModel(modeloPelicula);
 
             try {
@@ -1710,7 +1721,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
                 jTableModificar.setModel(modeloPelicula);
                 rs.close();
-                jTextAreaRegistroModificar.setText("Películas buscadas correctamente");
+                jTextAreaRegistroModificar.setText("Películas encontradas correctamente");
             } catch (SQLException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1760,23 +1771,23 @@ public class FramePrincipal extends javax.swing.JFrame {
  * @param evt
  */
     private void btnGuardarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeliculaActionPerformed
-        int anio = Utilidades.validaInt(txtAnioPelicula.getText());
-        int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
-        
         if (txtTituloPelicula.getText().equals("") | txtAnioPelicula.getText().equals("") | txtDuracionPelicula.getText().equals("")){
-            jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
+            jTextAreaRegistroPelicula.setText("Error al guardar la película en la base de datos, rellene todos los campos");
+            JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos");
         }else{
             if (Utilidades.confirmar()==0) {
+                int anio = Utilidades.validaInt(txtAnioPelicula.getText());
+                int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
                 p.setTitulo(txtTituloPelicula.getText());
                 p.setAnio(anio);
                 p.setDuracion(duracion);
                 p.setResumen(jTextAreaResumenPelicula.getText());
                 insertarPelicula(p.getTitulo(), p.getAnio(), p.getDuracion(), p.getResumen());
                 jTextAreaRegistroPelicula.setText("La película "+p.getTitulo()+" ha sido insertada correctamente");
+                bloquearRegistro();
+                limpiarRegistro();
             }
         }
-        bloquearRegistro();
-        limpiarRegistro();
     }//GEN-LAST:event_btnGuardarPeliculaActionPerformed
 /**
  * Actv para activar registro
@@ -1791,10 +1802,11 @@ public class FramePrincipal extends javax.swing.JFrame {
  * @param evt
  */
     private void btnGuardarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActorActionPerformed
-        if (Utilidades.validaString(txtNombreActor.getText()) == true && Utilidades.validaString(txtApellidoActor.getText()) == true && Utilidades.validaString(txtNacionalidadActor.getText()) == true && Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText())) == true) {       
-            if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")) {
-                jTextAreaRegistroActor.setText("Error al guardar el Actor en la base de datos, rellene todos los campos");
-            }else{
+        if (txtNombreActor.getText().equals("") | txtApellidoActor.getText().equals("") | txtNacimiento.getText().equals("") | txtNacionalidadActor.getText().equals("")) {
+                jTextAreaRegistroActor.setText("Rellene todos los campos");
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos");
+        }else{
+            if ((Utilidades.validaString(txtNombreActor.getText()) == true) && (Utilidades.validaString(txtApellidoActor.getText()) == true) && (Utilidades.validaString(txtNacionalidadActor.getText()) == true) && (Utilidades.validaFecha(Utilidades.validaInt(txtNacimiento.getText()))) == true) {       
                 if (Utilidades.confirmar()==0) {
                     a.setNombre(txtNombreActor.getText());
                     a.setApellidos(txtApellidoActor.getText());
@@ -1804,11 +1816,12 @@ public class FramePrincipal extends javax.swing.JFrame {
                     jTextAreaRegistroActor.setText("Actor "+txtNombreActor.getText()+" insertado correctamente");
                     bloquearRegistro();
                     limpiarRegistro();
-                }
-            } 
-        }else{
-            JOptionPane.showMessageDialog(null, "Datos mal introducidos");
-        }
+                }       
+            }else{
+                JOptionPane.showMessageDialog(null, "Datos mal introducidos");
+            }
+        
+        } 
     }//GEN-LAST:event_btnGuardarActorActionPerformed
 /**
  * Actv guardar registro
@@ -1989,25 +2002,25 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void btnReestrablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReestrablecerActionPerformed
         if (jComboBoxPaneles.getSelectedIndex()==0) {
             jPanel2.setBackground(new java.awt.Color(204,204,255));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==1) {
             jPanel3.setBackground(new java.awt.Color(255,204,255));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==2) {
             jPanel4.setBackground(new java.awt.Color(255,204,204));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==3) {
             jPanel5.setBackground(new java.awt.Color(238,238,238));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==4) {
             jPanel6.setBackground(new java.awt.Color(204,255,204));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==5) {
             jPanel7.setBackground(new java.awt.Color(204,153,255));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }else if (jComboBoxPaneles.getSelectedIndex()==6) {
             jPanel8.setBackground(new java.awt.Color(204,204,0));
-            JOptionPane.showMessageDialog(null, "Color reestablecido correctamente");
+            JOptionPane.showMessageDialog(null, "Color restablecido correctamente");
         }
     }//GEN-LAST:event_btnReestrablecerActionPerformed
 /**
@@ -2099,14 +2112,13 @@ public class FramePrincipal extends javax.swing.JFrame {
  */
     private void btnBorrarRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRelacionActionPerformed
         int fila = jTableAsociados.getSelectedRow();
-        int fila1 = jTableAsociados.getSelectedRow();
-        String valor1 = jTableAsociados.getValueAt(fila1, 0).toString();
-        String valor2 = jTableAsociados.getValueAt(fila1, 1).toString();
-       
+
         if (fila >= 0 && Utilidades.confirmar()==0) {
+            String valor1 = jTableAsociados.getValueAt(fila, 0).toString();
+            String valor2 = jTableAsociados.getValueAt(fila, 1).toString();
             desInsertarAmbos(Utilidades.validaInt(valor1), Utilidades.validaInt(valor2));
         }else{
-            JOptionPane.showMessageDialog(null, "Por favor,seleccione una fila");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila");
         }          
     }//GEN-LAST:event_btnBorrarRelacionActionPerformed
 /**
@@ -2238,7 +2250,8 @@ public class FramePrincipal extends javax.swing.JFrame {
  */
     public void desbloquearBusquedaPelicula() {
         jComboBoxPelicula.setVisible(true);
-        txtBuscarPelicula.setEditable(true); 
+        txtBuscarPelicula.setEditable(true);
+        btnBuscarPelicula2.setEnabled(true);
     }
 /**
  * metodo para bloquear busquedas de actor   
@@ -2247,6 +2260,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBoxActor.setVisible(false);
         txtBuscarActor.setEditable(false);
         txtBuscarActor.setText("");
+        btnBuscarActor2.setEnabled(false);
     }
 /**
  * metodo para bloquear busqueda de pelicula   
@@ -2262,6 +2276,8 @@ public class FramePrincipal extends javax.swing.JFrame {
     public void desbloquearBusquedaActor() {
         jComboBoxActor.setVisible(true);
         txtBuscarActor.setEditable(true);
+        btnBuscarPelicula2.setEnabled(false);
+        btnBuscarActor2.setEnabled(true);
     }
 /**
  * metodo para desinsertar peliculas y actores    
@@ -2503,10 +2519,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         DefaultTableModel modeloPelicula = new DefaultTableModel();
     
         modeloPelicula.addColumn("Id");
-        modeloPelicula.addColumn("Titulo");
+        modeloPelicula.addColumn("Título");
         modeloPelicula.addColumn("Año");
         modeloPelicula.addColumn("Duración");
-        modeloPelicula.addColumn("Resúmen");
+        modeloPelicula.addColumn("Resumen");
             
         jTableBuscar.setModel(modeloPelicula);
             
@@ -2534,10 +2550,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     public void mostrarTablaPelicula() {
             DefaultTableModel modeloPelicula = new DefaultTableModel();
             modeloPelicula.addColumn("Id");
-            modeloPelicula.addColumn("Titulo");
+            modeloPelicula.addColumn("Título");
             modeloPelicula.addColumn("Año");
             modeloPelicula.addColumn("Duración");
-            modeloPelicula.addColumn("Resúmen");
+            modeloPelicula.addColumn("Resumen");
             
             jTableBuscar.setModel(modeloPelicula);
             

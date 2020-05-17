@@ -1606,6 +1606,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             if (nombre == true && apellido == true && nacionalidad == true && nacimiento == true) { 
                 if (txtModificarActorNombre.getText().equals("") | txtModificarActorApellido.getText().equals("") | txtModificarActorEdad.getText().equals("") | txtModificarActorNacionalidad.getText().equals("")) {
                     jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+                    JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
                 }else{
                     try {
                         PreparedStatement pps = cn.prepareStatement("UPDATE Actores SET Nombre='"+txtModificarActorNombre.getText()+"',Apellido='"+txtModificarActorApellido.getText()+"',ANacimiento='"+txtModificarActorEdad.getText()+"',Nacionalidad='"+txtModificarActorNacionalidad.getText()+"' WHERE idActores='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
@@ -1623,15 +1624,21 @@ public class FramePrincipal extends javax.swing.JFrame {
         }else if ((jComboBoxModificar.getSelectedIndex()==1)) {
             if (txtModificarPeliculaTitulo.getText().equals("") | txtModificarPeliculaAnio.getText().equals("") | txtModificarPeliculaDuracion.getText().equals("")) {
                 jTextAreaRegistroModificar.setText("Error, por favor, rellene los campos");
+                JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
             }else {
-                try {
-                    PreparedStatement pps = cn.prepareStatement("UPDATE Peliculas SET Titulo='"+txtModificarPeliculaTitulo.getText()+"',Anio='"+txtModificarPeliculaAnio.getText()+"',Duracion='"+txtModificarPeliculaDuracion.getText()+"',Resumen='"+jTextAreaModificarResumen.getText()+"' WHERE idPeliculas='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
-                    pps.executeUpdate();
-                    jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
-                    btnGuardarCambios.setVisible(false);
-                    jTextAreaRegistroModificar.setText("Película modificada correctamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                if (jTextAreaModificarResumen.getText().length()<=200){
+                    try {
+                        PreparedStatement pps = cn.prepareStatement("UPDATE Peliculas SET Titulo='"+txtModificarPeliculaTitulo.getText()+"',Anio='"+txtModificarPeliculaAnio.getText()+"',Duracion='"+txtModificarPeliculaDuracion.getText()+"',Resumen='"+jTextAreaModificarResumen.getText()+"' WHERE idPeliculas='"+jTableModificar.getValueAt(fila, 0).toString()+"'");
+                        pps.executeUpdate();
+                        jTextAreaRegistroModificar.setText("Se ha modificado la Película "+txtModificarPeliculaTitulo.getText()+ " correctamente");
+                        btnGuardarCambios.setVisible(false);
+                        jTextAreaRegistroModificar.setText("Película modificada correctamente");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Longitud del resumen excedida, por favor ingrese 200 caracteres o menos, actual "+jTextAreaModificarResumen.getText().length());
+
                 }
             }
         }
@@ -1775,17 +1782,21 @@ public class FramePrincipal extends javax.swing.JFrame {
             jTextAreaRegistroPelicula.setText("Error al guardar la película en la base de datos, rellene todos los campos");
             JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos");
         }else{
-            if (Utilidades.confirmar()==0) {
-                int anio = Utilidades.validaInt(txtAnioPelicula.getText());
-                int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
-                p.setTitulo(txtTituloPelicula.getText());
-                p.setAnio(anio);
-                p.setDuracion(duracion);
-                p.setResumen(jTextAreaResumenPelicula.getText());
-                insertarPelicula(p.getTitulo(), p.getAnio(), p.getDuracion(), p.getResumen());
-                jTextAreaRegistroPelicula.setText("La película "+p.getTitulo()+" ha sido insertada correctamente");
-                bloquearRegistro();
-                limpiarRegistro();
+            if (jTextAreaResumenPelicula.getText().length()<=200) {
+                if (Utilidades.confirmar()==0) {
+                    int anio = Utilidades.validaInt(txtAnioPelicula.getText());
+                    int duracion = Utilidades.validaInt(txtDuracionPelicula.getText());
+                    p.setTitulo(txtTituloPelicula.getText());
+                    p.setAnio(anio);
+                    p.setDuracion(duracion);
+                    p.setResumen(jTextAreaResumenPelicula.getText());
+                    insertarPelicula(p.getTitulo(), p.getAnio(), p.getDuracion(), p.getResumen());
+                    jTextAreaRegistroPelicula.setText("La película "+p.getTitulo()+" ha sido insertada correctamente");
+                    bloquearRegistro();
+                    limpiarRegistro();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Longitud del resumen excedida, por favor ingrese 200 caracteres o menos, actual "+jTextAreaResumenPelicula.getText().length());
             }
         }
     }//GEN-LAST:event_btnGuardarPeliculaActionPerformed
